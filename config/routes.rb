@@ -53,5 +53,5 @@ Courseapp::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  get 'ui/(/:action)', controller: 'ui'
+  get 'ui(/:action)', controller: 'ui'
 end
