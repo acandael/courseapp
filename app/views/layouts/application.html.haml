@@ -16,4 +16,16 @@
 
   %body
     = yield
-    = javascript_include_tag "application"
+    %footer.row
+      .large-12.columns
+        %hr
+        .row
+          .large-6.columns
+            %p &copy;Safetatwork 2013 Contact
+          .large-6.columns
+            %ul.inline-list.right
+              %li Sign Up
+              %li Course
+              %li Support
+  = javascript_include_tag "application"
+  
