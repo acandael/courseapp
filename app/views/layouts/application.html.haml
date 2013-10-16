@@ -1,0 +1,76 @@
+!!! 5
+/ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+/[if lt IE 7 ] <html class="ie6" lang="en">
+/[if IE 7 ]    <html class="ie7" lang="en">
+/[if IE 8 ]    <html class="ie8" lang="en">
+/[if IE 9 ]    <html class="ie9" lang="en">
+/[if (gt IE 9)|!(IE)] <!--> <html lang="en">
+%html(lang="en")
+  %head
+    %title= content_for?(:title) ? yield(:title) : "Untitled"
+    %meta(charset="UTF-8") 
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "vendor/custom.modernizr"
+    = csrf_meta_tags
+
+  %body
+    %nav.top-bar
+      %ul.title-area
+        %li.name
+          %h1
+            %a(href="#") HSE.TV
+        /Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+        %li.toggle-topbar.menu-icon
+          %a(href="#")
+            %span Menu
+      %section.top-bar-section
+        %ul.left
+          %li.divider
+            %li.active
+              %a(href="../index.html") Home
+            %li.divider
+            %li
+              %a(href="../plan_sign_up.html") Signup and Pricing
+            %li.divider
+            %li
+              %a(href="../public/course.html") Course
+            %li.divider
+            %li
+              %a(href="#") Support
+
+        %ul.right
+          %li.has-dropdown
+            %a(href="#")Admin
+            %ul.dropdown
+              %li
+                %a(href="courses.html") Courses
+              %li
+                %a(href="modules.html") Modules
+              %li
+                %a(href="videos.html") Videos
+          %li.divider
+          %li.has-form
+            %form
+              .row.collapse
+                .small-8.columns
+                  %input(type="text")
+                .small-4.columns
+                  %a(href="#" class="alert button") Search
+          %li.divider.show-for-small
+          %li.has-form
+            %a(class="button" href="#")Button
+    = yield
+    %footer.row
+      .large-12.columns
+        %hr
+        .row
+          .large-6.columns
+            %p &copy;Safetatwork 2013 Contact
+          .large-6.columns
+            %ul.inline-list.right
+              %li Sign Up
+              %li Course
+              %li Support
+  = javascript_include_tag "application"
+  

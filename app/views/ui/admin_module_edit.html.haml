@@ -1,0 +1,46 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="#") Home
+    %li
+      %a(href="modules.html") Modules
+    %li
+      %a(href="module.html") Module 1
+    %li.current
+      %a(href="#") Edit
+      form>
+.row
+  %h3.subheader Edit Module 1: Wetgeving: veiligheid, gezondheid en milieu
+  .row
+    .large-12.columns
+      &nbsp;
+  .row
+    .large-2.columns
+      %label(for="title") Module Title:
+    .large-6.columns
+      %input(type="text" id="title" value="Wetgeving: veiligheid, gezondheid en milieu")
+    .large-4.columns
+  .row
+    .large-2.columns
+      %label(for="title")Description:
+    .large-6.columns
+      %textarea(placeholder="Deze module bespreek de verschillende aspecten mbt veiligheid, gezondheid en milieu")
+    .large-4.columns
+  .row
+    .large-2.columns
+      %label(for="badgetagline") Badge Tag Line
+    .large-10.columns
+      %input(type="text" id="badgetagline" value="Congratulations, you completed the badge!")
+  .row
+    .large-2.columns
+      %label(for="badgeupload") Badge Image
+    .large-4.columns
+      %img(class="th" src="../images/stylesheets.png")
+    .large-6.columns
+      %input(type="file" id="badgeupload")
+  .row
+    .large-12.columns
+      %br
+  .row
+    .large-6.columns
+      %input(type="submit" class="button success" value="Edit Module")

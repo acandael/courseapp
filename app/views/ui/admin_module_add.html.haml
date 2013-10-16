@@ -1,0 +1,41 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="#") Home
+    %li
+      %a(href="modules.html") Modules
+    %li.current
+      %a(href="#") Add Module
+.row
+  .large-12.columns
+    %h1 Add a module
+%form
+  .row
+    .row
+      .large-2.columns
+        %label(for="title") Module Title:
+      .large-6.columns
+        %input(type="text" id="title")
+      .large-4.columns
+    .row
+      .large-2.columns
+        %label(for="title") Description:
+      .large-6.columns
+        %textarea(placeholder="Enter a small description for this course")
+      .large-4.columns
+    .row
+      .large-2.columns
+        %label(for="badgetagline") Badge Tag Line
+      .large-10.columns
+        %input(type="text" id="badgetagline")
+    .row
+      .large-2.columns
+        %label(for="badgeupload") Upload Badge Image
+      .large-10.columns
+        %input(type="file" id="badgeupload")
+    .row
+      .large-12.columns
+        %br
+    .row
+      .large-6.columns
+        %input(type="submit" class="button success" value="Add Module")
