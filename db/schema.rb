@@ -16,89 +16,11 @@ ActiveRecord::Schema.define(version: 20131016183842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "courses", force: true do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "genres", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "genre_id"
-  end
-
-  create_table "invitations", force: true do |t|
-    t.integer  "inviter_id"
-    t.string   "recipient_name"
-    t.string   "recipient_email"
-    t.text     "message"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "token"
-  end
-
-  create_table "payments", force: true do |t|
-    t.integer "user_id"
-    t.integer "amount"
-    t.string  "reference_id"
-  end
-
-  create_table "queue_items", force: true do |t|
-    t.integer  "video_id"
-    t.integer  "user_id"
-    t.integer  "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "relationships", force: true do |t|
-    t.integer  "follower_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "leader_id"
-  end
-
-  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
-
-  create_table "reviews", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "video_id"
-    t.text     "content"
-    t.integer  "rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: true do |t|
-    t.string   "email"
-    t.string   "password_digest"
-    t.string   "full_name"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "token"
-    t.boolean  "admin"
-    t.string   "customer_token"
-    t.boolean  "active",          default: true
-  end
-
-  create_table "videos", force: true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "genre_id"
-    t.string   "large_cover"
-    t.string   "small_cover"
-    t.string   "video_url"
   end
 
 end
