@@ -12,6 +12,9 @@ gem 'sass-rails', '~> 4.0.0'
 # Use Foundation framework
 gem 'zurb-foundation'
 
+# Use Haml as viewengine
+gem 'haml-rails'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
