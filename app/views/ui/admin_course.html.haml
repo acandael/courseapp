@@ -1,0 +1,51 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="#") Home
+    %li
+      %a(href="courses.html") Courses
+    %li.current
+      %a(href="#") Course 1: VCA Exam Preparation
+
+.row
+  .large-12.columns
+    %h3 Course 1: VCA Exam Preparation
+    .row
+      .large-9.columns
+        %p This course is a preparation for the VCA Exam
+      .large-3.columns
+        %a.button.success(href="course_edit.html") Edit Course
+    .row
+      %h4.subheader Modules
+      .large-9.columns
+        %table.large-12.columns
+          %tr
+            %td Id
+            %td Module Title
+            %td Edit Module
+          %tr
+            %td 1
+            %td
+              %a(href="module.html") Wetgeving: Gezondheid, Veiligheid, Milieu
+            %td
+              %a(href="module_edit.html")Edit
+              &nbsp;&nbsp;
+              %a(href="#") Delete
+          %tr
+            %td 2
+            %td>
+              %a(href="module.html") HSE Hazards: Risk &amp; Prevention
+            %td
+              %a(href="module_edit.html") Edit
+              &nbsp;&nbsp;
+              %a(href="#") Delete
+          %tr
+            %td 3
+            %td
+              %a(href="module.html") VCA Law: Basic Concepts
+            %td
+              %a(href="module_edit.html") Edit
+              &nbsp;&nbsp;
+              %a(href="#") Delete
+      .large-3.columns
+        %a.button.success(href="course_add_modules.html") Add Modules
