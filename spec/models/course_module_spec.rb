@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe CourseModule do
   it { should belong_to(:course) }
+  it { should have_many(:videos) }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:description) }
   it "saves itself" do
