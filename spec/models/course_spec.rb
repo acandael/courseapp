@@ -9,4 +9,13 @@ describe Course do
     course.save
     expect(Course.first).to eq(course)
   end
+
+  it "has many coursemodules" do
+    course = Course.create(title: "course1", description: "description for course 1")
+    module1 = CourseModule.create(title: "module1", description: "description for module 1", course_id: course.id)
+    course.course_modules << module1
+    module2 = CourseModule.create(title: "module2", description: "description for module 2", course_id: course.id)
+    course.course_modules << module2
+    expect(course.course_modules).to include(module1, module2)
+  end
 end
