@@ -16,4 +16,15 @@ describe CourseModule do
     module1 = CourseModule.create(title: "module 1", description: "description for module 1", course_id: course.id)
     expect(course.course_modules.first).to eq(module1)
   end
+
+  it "has many videos" do
+course_module = Fabricate(:course_module) 
+    video1 = Fabricate(:video) 
+    video1.course_module_id = course_module.id
+    course_module.videos << video1
+    video2 = Fabricate(:video) 
+    video2.course_module_id = course_module.id
+    course_module.videos << video2
+    expect(course_module.videos).to include(video1, video2)
+  end
 end
