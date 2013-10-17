@@ -1,0 +1,19 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="index.html") Home
+    %li.current Course 1: VCA Basic Course
+%header.row
+  .panel.callout
+    %h1= @course.title 
+    %p= @course.description
+.row
+  .large-9.columns
+    - @course.course_modules.each do |mod|
+      .row
+        %h3.subheader= mod.title  
+        .large-4.columsn
+          %img.left(src="../images/fundamentals.png" width="126" height="126")
+        .large-8.columns
+          %p= mod.description 
+          %a.small.button.success.right(href="module.html") Get started
