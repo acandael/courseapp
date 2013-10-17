@@ -1,8 +1,12 @@
-requires 'spec_helper'
+require 'spec_helper'
 
 describe CoursesController do
-  describe "GET #index" do
-    it "populates an array of courses"
-    it "renders the :index view"
+  describe "GET #show" do
+    it "set @course" do
+      course = Fabricate(:course)
+      get :show, id: course.id
+      expect(assigns(:course)).to eq(course)
+    end
+    it "renders the show template"
   end
 end
