@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   host: localhost
-  database: myflix_development
+  database: courseapp_development
   pool: 5
   username: acandael
   timeout: 5000
@@ -12,7 +12,7 @@ development:
 test:
   adapter: postgresql
   host: localhost
-  database: myflix_test
+  database: courseapp_test
   pool: 5
   username: acandael
   timeout: 5000
