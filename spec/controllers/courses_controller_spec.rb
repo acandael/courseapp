@@ -7,6 +7,5 @@ describe CoursesController do
       get :show, id: course.id
       expect(assigns(:course)).to eq(course)
     end
-    it "renders the show template"
   end
 end
