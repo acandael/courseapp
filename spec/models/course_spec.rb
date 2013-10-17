@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Course do
-  it { should have_many(:modules) }
+  it { should have_many(:course_modules) }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:description) }
   it "saves itself" do
