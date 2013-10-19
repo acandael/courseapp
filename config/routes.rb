@@ -54,5 +54,7 @@ Courseapp::Application.routes.draw do
   #     resources :products
   #   end
   get 'ui(/:action)', controller: 'ui'
-  resources :courses, only: [:show]
+  resources :courses, only: [:show] do
+    resources :chapters, only: [:show]
+  end
 end
