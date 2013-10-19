@@ -7,4 +7,5 @@ describe CoursesController do
       get :show, id: course.id
       expect(assigns(:course)).to eq(course)
     end
+  end
 end
