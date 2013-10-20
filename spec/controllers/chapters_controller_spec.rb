@@ -9,6 +9,14 @@ describe ChaptersController do
       expect(assigns(:chapter)).to eq(chapter)
     end
 
+    it "sets @video" do
+      course = Fabricate(:course)
+      chapter = Fabricate(:chapter, course_id: course.id)
+      video = Fabricate(:video, chapter_id: chapter.id)
+      get :show, id: chapter.id, course_id: course.id, video_id: video.id
+      expect(assigns(:video)).to eq(video)
+    end
+
     it "renders the show template" do
       course = Fabricate(:course)
       chapter = Fabricate(:chapter, course_id: course.id)
