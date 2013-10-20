@@ -54,7 +54,9 @@ Courseapp::Application.routes.draw do
   #     resources :products
   #   end
   get 'ui(/:action)', controller: 'ui'
+  get 'courses/:id/chapters/:chapter_id/video/:video_id', controller: 'chapters', action: 'show', as: 'show_video'
   resources :courses, only: [:show] do
     resources :chapters, only: [:show]
   end
-end
+
+  end
