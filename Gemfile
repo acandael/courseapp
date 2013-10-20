@@ -60,3 +60,7 @@ end
 group :test do
   gem 'shoulda-matchers'
 end
+
+group :development do
+  gem 'pry'
+end
