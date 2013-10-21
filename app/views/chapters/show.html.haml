@@ -11,36 +11,41 @@
 .row
   .large-8.columns
     .flex-video
-      - if @video
-        %iframe(width="420" height="315" src="#{ @video.video_url }" frameborder="0" allowfullscreen)
+      -if @chapter.videos != []
+        - if @video
+          %iframe(width="420" height="315" src="#{ @video.video_url }" frameborder="0" allowfullscreen)
+        - else
+          %iframe(width="420" height="315" src="http://www.youtube.com/embed/0_EW8aNgKlA" frameborder="0" allowfullscreen)
+        - if @video
+          %h3= @video.title
+          %p=  @video.description
+        - else
+          %h3= @chapter.videos.first.title
+          %p=  @chapter.videos.first.description
       - else
-        %iframe(width="420" height="315" src="http://www.youtube.com/embed/0_EW8aNgKlA" frameborder="0" allowfullscreen)
-    - if @video
-      %h3= @video.title
-      %p=  @video.description
-    - else
-      %h3= @chapter.videos.first.title
-      %p=  @chapter.videos.first.description
+        %p no videos at the moment
 
     %table.large-12.columns
-      - @chapter.videos.each do |video|
+      - if @chapter.videos != []
+        - @chapter.videos.each do |video|
+          %tr
+            %td
+              %i.foundiconsoc-youtube
+            %td 
+              = link_to video.title, show_video_path(id: @chapter.course_id, chapter_id: video.chapter_id, video_id: video.id) 
+            %td= "#{ video.mins } mins - #{ video.secs } secs"
+            %td
+              %i.foundicongen-checkmark
         %tr
           %td
-            %i.foundiconsoc-youtube
-          %td 
-            = link_to video.title, show_video_path(id: @chapter.course_id, chapter_id: video.chapter_id, video_id: video.id) 
-          %td= "#{ video.mins } mins - #{ video.secs } secs"
+            &nbsp;
           %td
-            %i.foundicongen-checkmark
-      %tr
-        %td
-          &nbsp;
-        %td
-          %a(href="quiz.html" class="small button") Take the quiz
-        %td
-          &nbsp;
-        %td
-          &nbsp;
+            = link_to "Take the quiz", quiz_path(@chapter.quiz), class: "small button"
+          %td
+            &nbsp;
+          %td
+            &nbsp;
+      
   .large-4.columns
     %aside
       .panel
