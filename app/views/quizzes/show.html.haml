@@ -1,0 +1,50 @@
+
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="index.html") Home
+    %li
+      = link_to @course.title, course_path(@course.id) 
+    %li
+      = link_to @chapter.title, chapter_path(@chapter.id)
+    %li.current= @quiz.title 
+%header.row
+  %h1.subheader= @quiz.title 
+.row
+  .large-8.columns
+    %form.custom
+      .panel
+        %p
+          %strong= @question.title 
+        %label(for="radioAge")
+          %input(type="radio" name="radioAge" id="radioAge" value="COSHH" style="display:none;" CHECKED)
+          %span.custom.radio.checked
+          COSHH
+          %br
+        %label(for="radioAge")
+          %input(type="radio" name="radioAge" id="radioAge" value="OSHI" style="display:none;")
+          %span.custom.radio
+          OSHI
+          %br
+        %label(for="radioAge")
+          %input(type="radio" name="radioAge" id="radioAge" value="HSE" style="display:none;")
+          %span.custom.radio
+          The Health and Safety at Work etc. Act 1974 
+          %br
+      .panel
+        = link_to "Next Question", question_path(id: @question.id), class: "button"
+    #myModal.reveal-modal
+      %h3 Congratulations, you just earnt the
+      %p.lead VCA Basic Security Badge
+      %img(scr="../images/templating.png")
+      %a.close-reveal-modal
+        &#215;
+  %aside.large-4.columns
+    .panel
+      %p
+        %i.foundicongen-graph
+        %strong Quiz
+        %br
+        Question 1 of 4
+      .progress.large-6.success
+        %span.meter(style="width: 20%")
