@@ -30,7 +30,7 @@ video5 = Video.create(title: "The safe workplace", description: "description for
 end
 
 if chapter1.quiz = nil
-quiz = Quiz.create(title: "VCA Basic Security Quiz", chapter_id: chapter1.id)
+quiz = Quiz.create(title: "VCA Basic Security Quiz", success_message: "Congratulations, you just earned a VCA Basic Security Badge", chapter_id: chapter1.id)
 end
 
 quiz1 = Quiz.find(1)
