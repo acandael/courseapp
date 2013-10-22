@@ -29,9 +29,7 @@ video4 = Video.create(title: "Hazards and risk prevention", description: "descri
 video5 = Video.create(title: "The safe workplace", description: "description for video5", mins: 4, secs: 24, video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/Mod0-1.introduction.mp4", chapter_id: chapter1.id)
 end
 
-if chapter1.quiz = nil
-quiz = Quiz.create(title: "VCA Basic Security Quiz", success_message: "Congratulations, you just earned a VCA Basic Security Badge", chapter_id: chapter1.id)
-end
+Quiz.create(title: "VCA Basic Security Quiz", success_message: "Congratulations, you just earned a VCA Basic Security Badge", chapter_id: chapter1.id)
 
 quiz1 = Quiz.find(1)
 
