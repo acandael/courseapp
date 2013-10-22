@@ -6,23 +6,17 @@ describe QuizzesController do
       course = Fabricate(:course)
       chapter = Fabricate(:chapter, course_id: course.id)
       quiz = Fabricate(:quiz, chapter_id: chapter.id)
-      get :show, id: quiz.id, chapter_id: chapter.id
+      question = Fabricate(:question, quiz_id: quiz.id)
+      get :show, id: quiz.id, question_id: question.id 
       expect(assigns(:quiz)).to eq(quiz)
-    end
-
-    it "set @chapter" do
-      course = Fabricate(:course)
-      chapter = Fabricate(:chapter, course_id: course.id)
-      quiz = Fabricate(:quiz, chapter_id: chapter.id)
-      get :show, id: quiz.id, chapter_id: chapter.id
-      expect(assigns(:chapter)).to eq(chapter)
     end
 
     it "set @course" do
       course = Fabricate(:course)
       chapter = Fabricate(:chapter, course_id: course.id)
       quiz = Fabricate(:quiz, chapter_id: chapter.id)
-      get :show, id: quiz.id, chapter_id: chapter.id
+      question = Fabricate(:question, quiz_id: quiz.id)
+      get :show, id: quiz.id, question_id: question.id 
       expect(assigns(:course)).to eq(course)
     end
 
