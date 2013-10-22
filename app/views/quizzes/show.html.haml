@@ -6,7 +6,7 @@
     %li
       = link_to @course.title, course_path(@course.id) 
     %li
-      = link_to @chapter.title, chapter_path(@chapter.id)
+      = link_to @quiz.chapter.title, chapter_path(@quiz.chapter.id)
     %li.current= @quiz.title 
 %header.row
   %h1.subheader= @quiz.title 
@@ -23,7 +23,7 @@
               %span.custom.radio
               = answer.title
             %br
-          = f.submit class: "button"
+          = f.submit "Answer Question", class: "button"
       - else
         %p no answers available
   %aside.large-4.columns
