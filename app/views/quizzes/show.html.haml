@@ -1,0 +1,37 @@
+
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="index.html") Home
+    %li
+      = link_to @course.title, course_path(@course.id) 
+    %li
+      = link_to @quiz.chapter.title, chapter_path(@quiz.chapter.id)
+    %li.current= @quiz.title 
+%header.row
+  %h1.subheader= @quiz.title 
+.row
+  .large-8.columns
+    .panel
+      %p
+        %strong= @question.title 
+      - if @question.answers != []
+        = form_for @answer, url: check_answer_path, method: :post, html: { class: "custom" } do |f|
+          - @question.answers.each do |answer|
+            %label 
+              = f.radio_button :title, answer.title
+              %span.custom.radio
+              = answer.title
+            %br
+          = f.submit "Answer Question", class: "button"
+      - else
+        %p no answers available
+  %aside.large-4.columns
+    .panel
+      %p
+        %i.foundicongen-graph
+        %strong Quiz
+        %br
+        Question 1 of 4
+      .progress.large-6.success
+        %span.meter(style="width: 20%")
