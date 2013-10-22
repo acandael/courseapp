@@ -55,8 +55,22 @@ Courseapp::Application.routes.draw do
   #   end
   get 'ui(/:action)', controller: 'ui'
   get 'courses/:id/chapters/:chapter_id/video/:video_id', controller: 'chapters', action: 'show', as: 'show_video'
+ 
+  get 'quizzes/:id/question/:question_id', controller: 'quizzes', action: 'show', as: 'show_question'
+  get 'quizzes/:id/quiz_success', controller: 'quizzes', action: 'complete', as: 'quiz_complete' 
+  post 'answer/:id', controller: 'answers', action: 'check_answer', as: 'check_answer'
   resources :courses, only: [:show] do
     resources :chapters, only: [:show]
+  end
+
+  resources :chapters, only: [:show] do
+    resources :quizzes, only: [:show]
+  end
+
+  resources :quizzes, only: [:show] do
+  end
+
+  resources :questions, only: [:show] do
   end
 
   end

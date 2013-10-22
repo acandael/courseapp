@@ -28,3 +28,25 @@ video3 = Video.create(title: "VCA law enforcment", description: "description for
 video4 = Video.create(title: "Hazards and risk prevention", description: "description for video4", mins: 3, secs: 24, video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/Mod0-1.introduction.mp4", chapter_id: chapter1.id)
 video5 = Video.create(title: "The safe workplace", description: "description for video5", mins: 4, secs: 24, video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/Mod0-1.introduction.mp4", chapter_id: chapter1.id)
 end
+
+if chapter1.quiz = nil
+quiz = Quiz.create(title: "VCA Basic Security Quiz", chapter_id: chapter1.id)
+end
+
+quiz1 = Quiz.find(1)
+
+if quiz1.questions.count == 0
+  question1 = Question.create(title: "Which Official Body is responsible for enforcing VCA Legislation?", quiz_id: quiz1.id)
+  question2 = Question.create(title: "Where was Napoleon born?", quiz_id: quiz1.id)
+  question3 = Question.create(title: "What was the nationality of Mata Hari?", quiz_id: quiz1.id)
+end
+
+question1 = Question.find(1)
+
+if question1.answers.count == 0
+  answer1 = Answer.create(title: "COSHH", is_correct: true, question_id: question1.id)
+  answer2 = Answer.create(title: "OSHI", is_correct: false, question_id: question1.id)
+  answer3 = Answer.create(title: "The Health and Safety at Work etc. Act 1974", is_correct: false, question_id: question1.id)
+end
+
+
