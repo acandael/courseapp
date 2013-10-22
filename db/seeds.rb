@@ -41,4 +41,12 @@ if quiz1.questions.count == 0
   question3 = Question.create(title: "What was the nationality of Mata Hari?", quiz_id: quiz1.id)
 end
 
-quiz1.update(success_message: "Congratulations, you just earnt the VCA Basic Security Badge!")
+question1 = Question.find(1)
+
+if question1.answers.count == 0
+  answer1 = Answer.create(title: "COSHH", is_correct: true, question_id: question1.id)
+  answer2 = Answer.create(title: "OSHI", is_correct: false, question_id: question1.id)
+  answer3 = Answer.create(title: "The Health and Safety at Work etc. Act 1974", is_correct: false, question_id: question1.id)
+end
+
+

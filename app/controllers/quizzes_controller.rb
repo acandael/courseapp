@@ -5,13 +5,12 @@ class QuizzesController < ApplicationController
     @course = Course.find(@chapter.course_id)
     if params[:question_id].present?
       @question = Question.find(params[:question_id])
+      @answer = @question.answers.first
     else
       @question = @quiz.questions.first  
+      @answer = @question.answers.first
     end
 
-    if params[:next]
-      @question = Question.subsequent_question(@question)
-    end
   end
 
   def complete

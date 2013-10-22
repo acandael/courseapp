@@ -12,33 +12,20 @@
   %h1.subheader= @quiz.title 
 .row
   .large-8.columns
-    %form.custom
-      .panel
-        %p
-          %strong= @question.title 
-        %label(for="radioAge")
-          %input(type="radio" name="radioAge" id="radioAge" value="COSHH" style="display:none;" CHECKED)
-          %span.custom.radio.checked
-          COSHH
-          %br
-        %label(for="radioAge")
-          %input(type="radio" name="radioAge" id="radioAge" value="OSHI" style="display:none;")
-          %span.custom.radio
-          OSHI
-          %br
-        %label(for="radioAge")
-          %input(type="radio" name="radioAge" id="radioAge" value="HSE" style="display:none;")
-          %span.custom.radio
-          The Health and Safety at Work etc. Act 1974 
-          %br
-      .panel
-        = link_to "Next Question", question_path(id: @question.id), class: "button"
-    #myModal.reveal-modal
-      %h3 Congratulations, you just earnt the
-      %p.lead VCA Basic Security Badge
-      %img(scr="../images/templating.png")
-      %a.close-reveal-modal
-        &#215;
+    .panel
+      %p
+        %strong= @question.title 
+      - if @question.answers != []
+        = form_for @answer, url: check_answer_path, method: :post, html: { class: "custom" } do |f|
+          - @question.answers.each do |answer|
+            %label 
+              = f.radio_button :title, answer.title
+              %span.custom.radio
+              = answer.title
+            %br
+          = f.submit class: "button"
+      - else
+        %p no answers available
   %aside.large-4.columns
     .panel
       %p

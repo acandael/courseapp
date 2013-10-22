@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   belongs_to :quiz
+  has_many :answers
   validates_presence_of :title
 
   def self.subsequent_question(previous_question)
