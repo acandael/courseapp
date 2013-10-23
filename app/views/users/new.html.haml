@@ -1,0 +1,71 @@
+.row.collapse
+  %h1 Sign Up for the Gold Subscription Plan
+  .large-2.columns
+    %img(src="../images/stylesheets.png" width="126" height="126")
+  .large-10.columns
+    %h3.subheader The Gold Subscription Plan gives you 20 employee accounts and is valid for a year
+.row
+  %hr
+%form
+  .row
+    .large-9.columns
+      %h3 Register
+      .row
+        .large-3.columns
+          %label(for="email")Email Address:
+        .large-9.columns
+          %input(type="text" id="email" placeholder="email@mycompany.com" )
+      .row
+        .large-3.columns
+          %label(for="password") Password:
+        .large-9.columns
+          %input(type="password" id="password")
+      .row
+        .large-3.columns
+          %label(for="fullname") Fullname:
+        .large-9.columns
+          %input(type="text" id="fullname")
+  .row
+    .large-9.columns
+      %h3 Payment
+      .row
+        .large-3.columns
+          %label(for="credit-card") Credit Card Number:
+        .large-5.columns
+          %input(type="text" id="credit-card")
+        .large-2.columns
+          %label(for="security") Security Code:
+        .large-2.columns
+          %input(type="text" id="security")
+      .row
+        .large-3.columns
+          %label(for="expiration") Expiration:
+        .large-5.columns
+          %select#customDropdown
+            %option(DISABLED) Select a month
+            %option september
+            %option october
+            %option november
+            %option december
+            %option januari
+            %option februari
+            %option march
+            %option april
+            %option may
+            %option june
+            %option july
+            %option august
+        .large-2.columns
+          %label(for="security") Year:
+        .large-2.columns
+          %select#customDropdown
+            %option(DISABLED) Select a year
+            %option 2013
+            %option 2014
+            %option 2015
+            %option 2016
+            %option 2017
+            %option 2018
+      .row
+        .large-6.columns
+          %input.button.success(type="submit" value="Sign Up")
