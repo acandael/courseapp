@@ -16,7 +16,7 @@
           %img.left(src="../images/fundamentals.png" width="126" height="126")
         .large-8.columns
           %p= chapter.description 
-          = link_to "Get started", course_chapter_path(chapter, chapter.course_id), class: "small button success right"
+          = link_to "Get started", chapter_path(chapter.id), class: "small button success right"
       - if chapter != @course.chapters.last
         .row
           %br

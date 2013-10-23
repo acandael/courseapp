@@ -30,12 +30,12 @@
         - @chapter.videos.each do |video|
           %tr
             %td
-              %i.foundiconsoc-youtube
+              %i.fi-play-video
             %td 
               = link_to video.title, show_video_path(id: @chapter.course_id, chapter_id: video.chapter_id, video_id: video.id) 
             %td= "#{ video.mins } mins - #{ video.secs } secs"
             %td
-              %i.foundicongen-checkmark
+              %i.fi-check
         %tr
           %td
             &nbsp;
