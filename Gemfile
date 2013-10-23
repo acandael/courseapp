@@ -11,6 +11,7 @@ gem 'sass-rails', '~> 4.0.0'
 
 # Use Foundation framework
 gem 'zurb-foundation'
+gem 'foundation-icons-sass-rails'
 
 # Use Haml as viewengine
 gem 'haml-rails'
