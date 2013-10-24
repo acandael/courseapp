@@ -1,0 +1,16 @@
+= form_tag sessions_path do
+  .row
+    .large-6.columns
+      %h3 Sign In
+      .row
+        .large-3.columns
+          = label_tag :email, "Email Address"
+        .large-9.columns
+          = email_field_tag :email
+      .row
+        .large-3.columns
+          = label_tag :password
+        .large-9.columns
+          = password_field_tag :password
+  .row
+    = submit_tag "Sign In", class: "button" 
