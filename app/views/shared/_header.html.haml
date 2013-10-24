@@ -1,0 +1,45 @@
+%nav.top-bar
+  %ul.title-area
+    %li.name
+      %h1
+        %a(href="#") HSE.TV
+    /Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+    %li.toggle-topbar.menu-icon
+      %a(href="#")
+        %span Menu
+  %section.top-bar-section
+    %ul.left
+      %li.divider
+      %li.active
+        = link_to "Home", root_path
+      %li.divider
+      %li
+        = link_to "Signup and Pricing", pages_subscription_plans_path
+      %li.divider
+      %li
+        %a(href="../public/course.html") Course
+      %li.divider
+      %li
+        %a(href="#") Support
+
+    %ul.right
+      %li.has-dropdown
+        %a(href="#") Admin
+        %ul.dropdown
+          %li
+            %a(href="courses.html") Courses
+          %li
+            %a(href="modules.html") Modules
+          %li
+            %a(href="videos.html") Videos
+      %li.divider
+      %li.has-form
+        %form
+          .row.collapse
+            .small-8.columns
+              %input(type="text")
+            .small-4.columns
+              %a(href="#" class="alert button") Search
+      %li.divider.show-for-small
+      %li.has-form
+        = link_to "Sign In", sign_in_path
