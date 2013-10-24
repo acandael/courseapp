@@ -1,0 +1,30 @@
+.row.collapse
+  %h1 Sign Up for the Gold Subscription Plan
+  .large-2.columns
+    %img(src="../images/stylesheets.png" width="126" height="126")
+  .large-10.columns
+    %h3.subheader The Gold Subscription Plan gives you 20 employee accounts and is valid for a year
+.row
+  %hr
+%form
+  .row
+    .large-9.columns
+      %h3 Register
+      .row
+        .large-3.columns
+          %label(for="email")Email Address:
+        .large-9.columns
+          %input(type="text" id="email" placeholder="email@mycompany.com" )
+      .row
+        .large-3.columns
+          %label(for="password") Password:
+        .large-9.columns
+          %input(type="password" id="password")
+      .row
+        .large-3.columns
+          %label(for="fullname") Fullname:
+        .large-9.columns
+          %input(type="text" id="fullname")
+  .row
+    .large-6.columns
+      %input.button.success(type="submit" value="Sign Up")
