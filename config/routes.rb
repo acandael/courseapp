@@ -58,6 +58,7 @@ Courseapp::Application.routes.draw do
   get 'pages/subscription_plans', controller: 'pages'
   get 'register', to: "users#new"
   get 'sign_in', to: 'sessions#new'
+  get 'sign_out', to: 'sessions#destroy'
   get 'home', to: 'courses#index'
   get 'courses/:id/chapters/:chapter_id/video/:video_id', controller: 'chapters', action: 'show', as: 'show_video'
  
