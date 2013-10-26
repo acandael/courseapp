@@ -1,6 +1,5 @@
 class AnswersController < ApplicationController
   def check_answer
-    require 'pry';binding.pry
     answer = Answer.find(params[:id])
     question = Question.find(answer.question_id)
     if Question.is_last?(question.id)

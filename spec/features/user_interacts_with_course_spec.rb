@@ -30,6 +30,5 @@ feature "User interacts with course" do
 
     choose(@answer.title)
     click_button "Answer Question"
-
   end
 end
