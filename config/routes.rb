@@ -57,6 +57,9 @@ Courseapp::Application.routes.draw do
   get 'ui(/:action)', controller: 'ui'
   get 'pages/subscription_plans', controller: 'pages'
   get 'register', to: "users#new"
+  get 'sign_in', to: 'sessions#new'
+  get 'sign_out', to: 'sessions#destroy'
+  get 'home', to: 'courses#index'
   get 'courses/:id/chapters/:chapter_id/video/:video_id', controller: 'chapters', action: 'show', as: 'show_video'
  
   get 'quizzes/:id/question/:question_id', controller: 'quizzes', action: 'show', as: 'show_question'
@@ -75,5 +78,8 @@ Courseapp::Application.routes.draw do
 
   resources :questions, only: [:show] do
   end
+
+  resources :users, only: [:create]
+  resources :sessions, only: [:create]
 
   end

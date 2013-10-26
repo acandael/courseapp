@@ -6,25 +6,25 @@
     %h3.subheader The Gold Subscription Plan gives you 20 employee accounts and is valid for a year
 .row
   %hr
-%form
+= form_for @user do |f|
   .row
     .large-9.columns
       %h3 Register
       .row
         .large-3.columns
-          %label(for="email")Email Address:
+          = f.label :email, "Email Address:"
         .large-9.columns
-          %input(type="text" id="email" placeholder="email@mycompany.com" )
+          = f.text_field :email, placeholder: "email@mycompany.com"
       .row
         .large-3.columns
-          %label(for="password") Password:
+          = f.label :password, "Password:"
         .large-9.columns
-          %input(type="password" id="password")
+          = f.password_field :password
       .row
         .large-3.columns
-          %label(for="fullname") Fullname:
+          = f.label :full_name, "Fullname:"
         .large-9.columns
-          %input(type="text" id="fullname")
+          = f.text_field :full_name
   .row
     .large-6.columns
-      %input.button.success(type="submit" value="Sign Up")
+      = f.submit "Sign Up", class: "button submit"
