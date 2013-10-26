@@ -14,9 +14,11 @@ gem 'sass-rails', '~> 4.0.0'
 # Use Foundation framework
 gem 'zurb-foundation'
 gem 'foundation-icons-sass-rails'
-
 # Use Haml as viewengine
 gem 'haml-rails'
+
+# Use bcrypt for encrypting passwords
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -62,6 +64,8 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :development do
