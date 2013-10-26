@@ -1,0 +1,25 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="#") Home
+    %li.current
+      %a(href="courses.html") Courses
+.row
+  .large-12.columns
+    %h3 Courses
+    .large-9.columns
+      %table.large-12.columns
+        %tr>
+          %td Id
+          %td Course Title
+          %td Edit
+        - @courses.each do |course|
+          %tr
+            %td= course.id
+            %td= course.title
+            %td 
+              %a(href="course.html") Edit
+              &nbsp;&nbsp;
+              %a(href="#") Delete
+    .large-3.columns
+      = link_to "Add Course", new_admin_course_path, class: "button success"

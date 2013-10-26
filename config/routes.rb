@@ -81,5 +81,9 @@ Courseapp::Application.routes.draw do
 
   resources :users, only: [:create]
   resources :sessions, only: [:create]
+  
+  namespace :admin do
+    resources :courses, only: [:index, :new, :create]
+  end
 
   end
