@@ -9,6 +9,7 @@
   .large-12.columns
     %h1 Add Course
     = form_for [:admin, @course] do |f|
+      = render 'shared/error_messages', target: @course
       .row
         .row
           .large-3.columns
