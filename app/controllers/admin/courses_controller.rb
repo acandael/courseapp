@@ -10,6 +10,21 @@ class Admin::CoursesController < ApplicationController
     @course = Course.new
   end
 
+  def edit
+    @course = Course.find(params[:id])
+  end
+
+  def update
+    @course = Course.find(params[:id])
+    if @course.update_attributes(course_params(params[:course]))
+      flash[:success] = "You successfully update course '#{ @course.title }'"
+      redirect_to admin_courses_path
+    else
+      flash[:error] = "You cannot update this record. Please check the errors."
+      render :edit 
+    end
+  end
+  
   def create
     @course = Course.create(course_params(params[:course]))
     if @course.save

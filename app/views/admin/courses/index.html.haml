@@ -18,7 +18,7 @@
             %td= course.id
             %td= course.title
             %td 
-              %a(href="course.html") Edit
+              = link_to "Edit", edit_admin_course_path(course)
               &nbsp;&nbsp;
               %a(href="#") Delete
     .large-3.columns
