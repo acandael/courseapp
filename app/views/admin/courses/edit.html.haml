@@ -1,0 +1,34 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="#") Home
+    %li
+      %a(href="courses.html") Courses
+    %li.current Add Course
+.row
+  .large-12.columns
+    %h1 Add Course
+    = form_for [:admin, @course] do |f|
+      = render 'shared/error_messages', target: @course
+      .row
+        .row
+          .large-3.columns
+            = f.label :title, "Course Title:" 
+          .large-6.columns
+            = f.text_field :title 
+          .large-3.columns
+        .row
+          .large-3.columns
+            = f.label :description, "Course Description:"
+          .large-6.columns
+            = f.text_area :description, placeholder: "description for the course"
+          .large-3.columns
+        .row
+          .large-12.columns
+            %br
+        .row
+          .large-12.columns
+            %br
+        .row
+          .large-6.columns
+            = f.submit "Update Course", class: "button success"

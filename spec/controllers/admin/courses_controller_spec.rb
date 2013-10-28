@@ -70,4 +70,62 @@ describe Admin::CoursesController do
       end
     end
   end
+
+  describe "PUT#update" do
+    before do
+        @course = Fabricate(:course)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { post :update, id: @course.id }
+    end
+    
+    it_behaves_like "requires admin" do
+      let(:action) { post :update, id: @course.id }
+    end
+
+    context "with valid input" do
+      it "updates an existing record" do
+        set_current_admin
+        put :update, id: @course.id, course: { id: @course.id, title: "new title", description: @course.description } 
+        @course.reload
+        expect(Course.find(@course.id).title).to eq(@course.title)
+      end
+
+      it "sets a flash success message" do
+        set_current_admin
+        put :update, id: @course.id, course: { id: @course.id, title: "new title", description: @course.description } 
+
+        expect(flash[:success]).to be_present
+      end
+      it "redirects to the courses index page" do
+        set_current_admin
+        put :update, id: @course.id, course: { id: @course.id, title: "new title", description: @course.description } 
+
+        expect(response).to redirect_to admin_courses_path 
+      end
+    end
+
+    context "with invalid input " do
+      it "does not update an existing record" do
+        set_current_admin
+        put :update, id: @course.id, course: { id: @course.id, title: "new title", description: nil} 
+        @course.reload
+        expect(Course.find(@course.id).description).not_to eq("") 
+      end
+      it "renders the :edit template" do
+        set_current_admin
+        put :update, id: @course.id, course: { id: @course.id, title: "new title", description: nil }
+        expect(response).to render_template :edit 
+      end
+      it "set a flash error message" do
+        set_current_admin
+        put :update, id: @course.id, course: { id: @course.id, title: "new title", description: nil } 
+
+        expect(flash[:error]).to be_present
+      end
+    end
+
+  end
+
+  
 end
