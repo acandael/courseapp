@@ -124,8 +124,34 @@ describe Admin::CoursesController do
         expect(flash[:error]).to be_present
       end
     end
-
   end
-
   
+  describe "DELETE #destroy" do
+    before do
+        @course = Fabricate(:course)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { delete :destroy, id: @course.id }
+    end
+    
+    it_behaves_like "requires admin" do
+      let(:action) { delete :destroy, id: @course.id }
+    end
+
+    it "redirects to the admin courses index page" do
+      set_current_admin
+      delete :destroy, id: @course.id
+      expect(response).to redirect_to admin_course_path
+    end
+    it "deletes the course" do
+      set_current_admin
+      delete :destroy, id: @course.id
+      expect(Course.count).to eq(0)
+    end
+    it "set the flash message" do
+      set_current_admin
+      delete :destroy, id: @course.id
+      expect(flash[:success]).to be_present 
+    end
+  end
 end
