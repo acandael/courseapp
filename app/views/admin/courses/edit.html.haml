@@ -54,4 +54,4 @@
             &nbsp;&nbsp; 
             %a(href="#") Delete
     .large-3.columns
-      %a.button.success(href="course_add_modules.html") Add Chapter
+      = link_to "Add Chapter", new_admin_course_chapter_path(@course), class: "button success"
