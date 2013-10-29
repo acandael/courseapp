@@ -84,6 +84,7 @@ Courseapp::Application.routes.draw do
   
   namespace :admin do
     resources :courses
+    resources :chapters
   end
 
   end

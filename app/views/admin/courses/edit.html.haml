@@ -4,31 +4,54 @@
       %a(href="#") Home
     %li
       %a(href="courses.html") Courses
-    %li.current Add Course
+    %li.current Edit Course
 .row
   .large-12.columns
-    %h1 Add Course
+    %h1 Edit Course
     = form_for [:admin, @course] do |f|
       = render 'shared/error_messages', target: @course
       .row
-        .row
-          .large-3.columns
-            = f.label :title, "Course Title:" 
-          .large-6.columns
-            = f.text_field :title 
-          .large-3.columns
-        .row
-          .large-3.columns
-            = f.label :description, "Course Description:"
-          .large-6.columns
-            = f.text_area :description, placeholder: "description for the course"
-          .large-3.columns
-        .row
-          .large-12.columns
-            %br
-        .row
-          .large-12.columns
-            %br
-        .row
-          .large-6.columns
-            = f.submit "Update Course", class: "button success"
+        .large-2.columns
+          = f.label :title, "Course Title:" 
+        .large-7.columns
+          = f.text_field :title 
+        .large-3.columns
+      .row
+        .large-2.columns
+          = f.label :description, "Course Description:"
+        .large-7.columns
+          = f.text_area :description, placeholder: "description for the course"
+        .large-3.columns
+          = f.submit "Update Course", class: "button success"
+    %h4.subheader Chapters
+    .large-9.columns
+      %table.large-12.columns
+        %tr
+          %td Id
+          %td Module Title
+          %td Edit Module
+        %tr
+          %td 1
+          %td
+            %a(href="module.html") Wetgeving: Gezondheid, Veiligheid, Milieu
+          %td
+            %a(href="module_edit.html") Edit
+            &nbsp;&nbsp;
+            %a(href="#") Delete
+        %tr
+          %td 2
+          %td
+            %a(href="module.html") HSE Hazards: Risk &amp; Prevention
+          %td
+            %a(href="module_edit.html") Edit
+            &nbsp;&nbsp; <a href="#">Delete</a></td>
+        %tr
+          %td 3
+          %td
+            %a(href="module.html") VCA Law: Basic Concepts
+          %td
+            %a(href="module_edit.html") Edit
+            &nbsp;&nbsp; 
+            %a(href="#") Delete
+    .large-3.columns
+      %a.button.success(href="course_add_modules.html") Add Chapter
