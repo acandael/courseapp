@@ -1,10 +1,32 @@
 .row
-  .large-12.columns.callout.panel
+  .large-12.columns.panel
     .large-5.columns
-      %h3.subheade HSE.TV provides you with the ideal preparation to your VCA Exam
-      %p Watch at your own pace our instructional videos and test your knowledge by taking a quiz that accompagnies each video lesson.
-      %p Our video lessons are given by active HSE-experts.
-      = link_to "Sign Up", pages_subscription_plans_path, class: "button large success"
+      .row
+        %h4.subheader HSE.TV provides you with the ideal preparation to your VCA Exam
+      .row
+        &nbsp;
+      .row
+        %p.lead Watch at your own pace our instructional videos and test your knowledge by taking a quiz that accompagnies each video lesson.
+        %p.lead Our video lessons are given by active HSE-experts.
+      .row
+        &nbsp;
+      .row
+        .large-offset-2.large-10.columns
+          = link_to "Sign Up", pages_subscription_plans_path, class: "button large success center"
     .large-7.columns
       .flex-video
         %iframe(width="420" height="315" src="http://deym6w9mlvqsh.cloudfront.net/videos/helm_eng_verun.mp4" frameborder="0" allowfullscreen)
+.row
+  .large-12.columns.callout.panel
+    .large-4.columns
+      %h4 Learn from the HSE-Experts
+      %p Youl'll get trained by HSE-experts, active in the field
+      %p These experts know the VCA-exam through an through and can point out pitfalls and common mistakes
+    .large-4.columns
+      %h4 Flexible learning
+      %p Our videos are structured in short chunks that are easy to digress.
+      %p You can watch at your own pace from any device (smarthpone, tablet, laptop, ...)
+    .large-4.columns
+      %h4 Affordable
+      %p HSE.TV is tailor made for enterprises that need to train their employees fast and in an affordable manner
+      %p With our bronze, silver and gold licenses, you can subscribe as many employees as you like at very affordable prices.
