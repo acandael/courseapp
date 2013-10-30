@@ -3,39 +3,43 @@
     %li
       %a(href="#") Home
     %li
-      %a(href="modules.html") Modules
+      %a(href="modules.html") Course
+    %li
+      %a(href="modules.html") Chapters
     %li.current
-      %a(href="#") Add Module
+      %a(href="#") Add Chapter
 .row
   .large-12.columns
-    %h1 Add a module
-%form
+    %h1 Add a chapter
+= form_for [:admin, @course, @chapter] do |f|
   .row
     .row
       .large-2.columns
-        %label(for="title") Module Title:
+        = f.label :title, "Chapter Title:" 
       .large-6.columns
-        %input(type="text" id="title")
+        = f.text_field :title 
       .large-4.columns
     .row
       .large-2.columns
-        %label(for="title") Description:
+        = f.label :description, "Chapter Description:"
       .large-6.columns
-        %textarea(placeholder="Enter a small description for this course")
+        = f.text_area :description, placeholder: "Enter a small description for this course"
       .large-4.columns
     .row
       .large-2.columns
-        %label(for="badgetagline") Badge Tag Line
+        = f.label :tagline, "Badge Tagline"
       .large-10.columns
-        %input(type="text" id="badgetagline")
+        = f.text_field :tagline
     .row
       .large-2.columns
-        %label(for="badgeupload") Upload Badge Image
-      .large-10.columns
-        %input(type="file" id="badgeupload")
+        = f.label :badge_image, "Upload a badge image"
+      .large-6.columns
+        = f.file_field :badge_image, class: "button"
+      .large-4.columns
+        &nbsp;
     .row
       .large-12.columns
         %br
     .row
       .large-6.columns
-        %input(type="submit" class="button success" value="Add Module")
+        %input(type="submit" class="button success" value="Add Chapter")
