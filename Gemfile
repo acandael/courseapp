@@ -41,6 +41,10 @@ gem 'jbuilder', '~> 1.2'
 gem 'fabrication'
 gem 'faker'
 
+# gems for uploading and image processing
+gem 'carrierwave'
+gem 'mini_magick'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
