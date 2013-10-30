@@ -1,0 +1,52 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="#") Home
+    %li
+      = link_to @chapter.course.title, admin_course_path(@chapter.course_id) 
+    %li.unavailable
+      %a(href="#") Chapters
+    %li.current
+      = @chapter.title 
+.row
+  .large-12.columns
+    %h3= @chapter.title
+    .row
+      .large-9.columns
+        %p
+          %strong Description:
+          = @chapter.description
+        %p 
+          %strong Badge Tagline:
+          = @chapter.tagline
+        %p
+          %strong Badge Image:
+        = image_tag(@chapter.badge_image)
+      .large-3.columns
+        = link_to "Edit Chapter", edit_admin_course_chapter_path(@chapter.course_id, @chapter.id), class: "button success"
+    .row
+      .large-12.columns
+        &nbsp;
+    .row
+      %h4.subheader Videos
+      .large-9.columns
+        %table.large-12.columns
+          %tr
+            %td Id
+            %td Video Title
+            %td Duration
+          %tr
+            %td 1
+            %td
+              %a(href="#") Introduction
+            %td 2mins - 34secs
+          %tr
+            %td 2
+            %td
+              %a(href="#")Basic Security
+            %td 2mins - 34secs
+          %tr
+            %td 3
+            %td
+              %a(href="#") Hazards &amp; Risk Prevention
+            %td 2mins - 34secs

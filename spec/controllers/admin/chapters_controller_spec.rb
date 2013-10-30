@@ -27,6 +27,38 @@ describe Admin::ChaptersController do
     end
   end
 
+  describe "GET #show" do
+    before do
+      @course = Fabricate(:course)
+      @chapter = Fabricate(:chapter, course_id: @course.id)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { get :show, course_id: @course.id, id: @chapter.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { get :show, course_id: @course.id, id: @chapter.id }
+    end
+    context "with valid user" do
+      it "renders the :show template" do
+        set_current_admin
+        get :show, course_id: @course.id, id: @chapter.id
+        expect(response).to render_template :show
+      end
+      it "returns a chapter" do
+        set_current_admin
+        get :show, course_id: @course.id, id: @chapter.id
+        expect(assigns(:chapter)).to be_present 
+      end
+    end
+
+    context "with invalid user" do
+      it "redirects to the sign in page" do
+        get :show, course_id: @course.id, id: @chapter.id
+        expect(response).to redirect_to sign_in_path 
+      end
+    end
+  end
+
   describe "GET #new" do
     before do
       @course = Fabricate(:course)
@@ -103,6 +135,62 @@ describe Admin::ChaptersController do
         course = Fabricate(:course)
         post :create, chapter: { description: "what you should know about a safe workplace", course_id: course.id, tagline: "congratulations, you earned the safe workplace badge", badge_image: "safe_workplace.jpg" }, course_id: @course.id
         expect(flash[:error]).to be_present 
+      end
+    end
+  end
+
+  describe "PUT #update" do
+    before do
+      @course = Fabricate(:course)
+      @chapter = Fabricate(:chapter, course_id: @course.id)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { post :update, course_id: @course.id, id: @chapter.id  }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { post :update, course_id: @course.id, id: @chapter.id  }
+    end
+
+    context "with valid input" do
+      it "redirects to the chapter show page" do
+        set_current_admin
+        put :update, course_id: @course.id, id: @chapter.id, chapter: { title: "new title", description: @chapter.description, course_id: @chapter.course_id, tagline: @chapter.tagline, badge_image: @chapter.badge_image } 
+        expect(response).to redirect_to admin_course_chapter_path(@chapter.course_id, @chapter.id)
+      end
+      it "updates the chapter" do
+        set_current_admin
+        put :update, course_id: @course.id, id: @chapter.id, chapter: { title: "new title", description: @chapter.description, course_id: @chapter.course_id, tagline: @chapter.tagline, badge_image: @chapter.badge_image } 
+        @chapter.reload
+        expect(@chapter.title).to eq("new title")
+      end
+      it "sets the flash success message" do
+        set_current_admin
+        put :update, course_id: @course.id, id: @chapter.id, chapter: { title: "new title", description: @chapter.description, course_id: @chapter.course_id, tagline: @chapter.tagline, badge_image: @chapter.badge_image } 
+        expect(flash[:success]).to be_present
+      end
+    end
+
+    context "with invalid input" do
+      it "does not update the chapter" do
+        set_current_admin
+        put :update, course_id: @course.id, id: @chapter.id, chapter: { title: "new title", description: "", course_id: @chapter.course_id, tagline: @chapter.tagline, badge_image: @chapter.badge_image } 
+        @chapter.reload
+        expect(Chapter.find(@chapter.id).description).not_to eq("")
+      end
+      it "renders the :edit template" do
+        set_current_admin
+        put :update, course_id: @course.id, id: @chapter.id, chapter: { title: "new title", description: "", course_id: @chapter.course_id, tagline: @chapter.tagline, badge_image: @chapter.badge_image } 
+        expect(response).to render_template :edit 
+      end
+      it "sets a flash error message" do
+        set_current_admin
+        put :update, course_id: @course.id, id: @chapter.id, chapter: { title: "new title", description: "", course_id: @chapter.course_id, tagline: @chapter.tagline, badge_image: @chapter.badge_image } 
+        expect(flash[:error]).to be_present 
+      end
+      it "sets the @chapter" do
+        set_current_admin
+        put :update, course_id: @course.id, id: @chapter.id, chapter: { title: "new title", description: "", course_id: @chapter.course_id, tagline: @chapter.tagline, badge_image: @chapter.badge_image } 
+        expect(assigns(:chapter)).to be_present 
       end
     end
   end

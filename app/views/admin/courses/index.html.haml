@@ -12,15 +12,7 @@
       %tr>
         %td Id
         %td Course Title
-        %td Edit
-        %td Chapters
       - @courses.each do |course|
         %tr
           %td= course.id
-          %td= course.title
-          %td 
-            = link_to "Edit", edit_admin_course_path(course)
-            &nbsp;&nbsp;
-            = link_to "Delete", admin_course_path(course.id), method: :delete
-          %td
-            = link_to "Chapters", admin_course_chapters_path(course.id)
+          %td= link_to course.title, admin_course_path(course.id)
