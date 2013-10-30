@@ -1,0 +1,48 @@
+.row
+  %ul.breadcrumbs
+    %li
+      = link_to "Courses", admin_courses_path 
+    %li
+      = link_to @chapter.course.title, admin_course_path(@chapter.course_id)
+    %li.unavailable
+      %a(href="#") Chapters
+    %li
+      = link_to @chapter.title, admin_course_chapter_path(@chapter.course_id, @chapter.id)
+    %li.current
+      %a(href="#") Edit
+.row
+  %h3.subheader Edit Chapter 1 #{ @chapter.title }
+  = form_for [:admin, @course, @chapter] do |f|
+    .row
+      .large-12.columns
+        &nbsp;
+    .row
+      .large-2.columns
+        = f.label :title, "Chapter Title:"
+      .large-6.columns
+        = f.text_field :title
+      .large-4.columns
+    .row
+      .large-2.columns
+        = f.label :description, "Chapter Description:"
+      .large-6.columns
+        = f.text_area :description
+      .large-4.columns
+    .row
+      .large-2.columns
+        = f.label :tagline, "Badge Tagline:"
+      .large-10.columns
+        = f.text_field :tagline
+    .row
+      .large-2.columns
+        = f.label :badge_image, "Upload a badge image"
+      .large-4.columns
+        = image_tag(@chapter.badge_image)
+      .large-6.columns
+        = f.file_field :badge_image
+    .row
+      .large-12.columns
+        %br
+    .row
+      .large-6.columns
+        %input(type="submit" class="button success" value="Update Chapter")

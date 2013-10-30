@@ -1,0 +1,26 @@
+.row
+  %ul.breadcrumbs
+    %li
+      = link_to "Courses", admin_courses_path
+    %li.current= @course.title 
+.row
+  .large-12.columns
+    %h3= @course.title 
+    .row
+      .large-9.columns
+        %p= @course.description 
+      .large-3.columns
+        = link_to "Edit Course", edit_admin_course_path(@course.id), class: "button success"
+.row
+  %h4.subheader Chapters
+  .large-9.columns
+    %table.large-12.columns
+      %tr
+        %td Id
+        %td Chapter Title
+      - @course.chapters.each do |chapter|
+        %tr
+          %td= chapter.id
+          %td
+            = link_to chapter.title, admin_course_chapter_path(@course.id, chapter.id) 
+    

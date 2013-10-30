@@ -1,6 +1,31 @@
 require 'spec_helper'
 
 describe Admin::CoursesController do
+
+  describe "GET #show" do
+    before do
+      @course = Fabricate(:course)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { get :show, id: @course.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { get :new }
+    end
+    context "with valid user" do
+      it "sets the course" do
+        set_current_admin
+        get :show, id: @course.id
+        expect(assigns(:course)).to be_present
+      end
+    end
+    context "with invalid user" do
+      it "redirect to the sign in page" do
+        get :show, id: @course.id
+        expect(response).to redirect_to sign_in_path
+      end
+    end
+  end
  
   describe "GET #new" do
     it_behaves_like "requires sign in" do
@@ -142,7 +167,7 @@ describe Admin::CoursesController do
     it "redirects to the admin courses index page" do
       set_current_admin
       delete :destroy, id: @course.id
-      expect(response).to redirect_to admin_course_path
+      expect(response).to redirect_to admin_courses_path
     end
     it "deletes the course" do
       set_current_admin
