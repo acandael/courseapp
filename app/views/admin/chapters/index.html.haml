@@ -1,0 +1,30 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="#") Home
+    %li(a href="courses.html") Courses
+    %li
+      = link_to @course.title, admin_course_path(@course.id) 
+    %li(class="current")
+      %a(href="#") Chapters 
+.row
+  .large-12.columns
+    = link_to "Add Chapter", new_admin_course_chapter_path(@course), class: "button success"
+    %h4.subheader Chapters
+    - if @course.chapters.count == 0
+      %p the course '#{ @course.title }' has no chapters
+    -else
+      %table
+        %tr
+          %td Id
+          %td Chapter Title
+          %td Edit Module
+        - @chapters.each do |chapter|
+          %tr
+            %td 1
+            %td
+              = chapter.title
+            %td
+              %a(href="module_edit.html") Edit
+              &nbsp;&nbsp;
+              %a(href="#") Delete

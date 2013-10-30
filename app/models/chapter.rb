@@ -4,4 +4,6 @@ class Chapter < ActiveRecord::Base
   has_one :quiz
   validates_presence_of :title, :description
 
+  mount_uploader :badge_image, BadgeImageUploader
+
 end

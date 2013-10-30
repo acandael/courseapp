@@ -1,0 +1,33 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="#") Home
+    %li
+      %a(href="courses.html") Courses
+    %li.current Add Course
+.row
+  .large-12.columns
+    %h1 Add Course
+%form
+  .row
+    .row
+      .large-3.columns
+        %label(for="title") Course Title: 
+      .large-6.columns
+        %input(type="text" id="title")
+      .large-3.columns
+    .row
+      .large-3.columns
+        %label(for="title") Course Description: 
+      .large-6.columns
+        %textarea(id="title" placeholder="description for the course")
+      .large-3.columns
+    .row
+      .large-12.columns
+        %br
+    .row
+      .large-12.columns
+        %br
+    .row
+      .large-6.columns
+        %input(type="submit" class="button success" value="Add Course")
