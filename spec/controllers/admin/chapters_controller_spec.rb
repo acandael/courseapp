@@ -2,6 +2,31 @@ require 'spec_helper'
 
 describe Admin::ChaptersController do
 
+  describe "GET #index" do
+    before do
+      @course = Fabricate(:course)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { get :index, course_id: @course.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { get :index, course_id: @course.id}
+    end
+    
+    it "sets the course" do
+      set_current_admin
+      get :index, course_id: @course.id
+      expect(assigns(:course)).to eq(@course)
+    end
+    it "set chapters" do
+      set_current_admin
+      chapter1 = Fabricate(:chapter, course_id: @course.id)
+      chapter2 = Fabricate(:chapter, course_id: @course.id)
+      get :index, course_id: @course.id
+      expect(assigns(:chapters)).to be_present 
+    end
+  end
+
   describe "GET #new" do
     before do
       @course = Fabricate(:course)
@@ -36,10 +61,10 @@ describe Admin::ChaptersController do
       let(:action) { post :create, course_id: @course.id }
     end
     context "with valid input" do
-      it "redirects to the courses edit page" do
+      it "redirects to the chapters index page" do
         set_current_admin
         post :create, chapter: { title: "the safe workplace", description: "what you should know about a safe workplace", course_id: @course.id, tagline: "congratulations, you earned the safe workplace badge", badge_image: "safe_workplace.jpg" }, course_id: @course.id
-        expect(response).to redirect_to edit_admin_course_path(@course.id)
+        expect(response).to redirect_to admin_course_chapters_path(@course.id)
       end
       it "creates a new chapter" do
         set_current_admin

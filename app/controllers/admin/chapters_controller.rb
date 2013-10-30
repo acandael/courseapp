@@ -4,6 +4,7 @@ class Admin::ChaptersController < ApplicationController
 
   def index
     @course = Course.find(params[:course_id])
+    @chapters = @course.chapters
   end
   def new
     @chapter = Chapter.new
@@ -12,9 +13,10 @@ class Admin::ChaptersController < ApplicationController
   
   def create
     @chapter = Chapter.create(chapter_params(params[:chapter]))
+    @chapter.course_id = params[:course_id] 
     if @chapter.save
       flash[:success] = "You created a new chapter, '#{ @chapter.title }' for course #{ @chapter.course_id }"
-      redirect_to edit_admin_course_path(@chapter.course_id)
+      redirect_to admin_course_chapters_path(@chapter.course_id)
     else
       flash[:error] = "You could not create a new chapter. Please check the error messages."
       render :new
