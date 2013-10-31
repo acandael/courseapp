@@ -37,7 +37,7 @@ class Admin::ChaptersController < ApplicationController
     @chapter.course_id = params[:course_id] 
     if @chapter.save
       flash[:success] = "You created a new chapter, '#{ @chapter.title }' for course #{ @chapter.course_id }"
-      redirect_to admin_course_chapters_path(@chapter.course_id)
+      redirect_to admin_course_path(@chapter.course_id)
     else
       flash[:error] = "You could not create a new chapter. Please check the error messages."
       render :new

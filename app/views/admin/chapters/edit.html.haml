@@ -12,7 +12,7 @@
       %a(href="#") Edit
 .row
   %h3.subheader Edit Chapter 1 #{ @chapter.title }
-  = form_for [:admin, @course, @chapter] do |f|
+  = form_for [:admin, @course, @chapter], html: { multipart: true } do |f|
     .row
       .large-12.columns
         &nbsp;

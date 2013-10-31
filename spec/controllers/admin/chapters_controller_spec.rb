@@ -93,10 +93,10 @@ describe Admin::ChaptersController do
       let(:action) { post :create, course_id: @course.id }
     end
     context "with valid input" do
-      it "redirects to the chapters index page" do
+      it "redirects to the course show page" do
         set_current_admin
         post :create, chapter: { title: "the safe workplace", description: "what you should know about a safe workplace", course_id: @course.id, tagline: "congratulations, you earned the safe workplace badge", badge_image: "safe_workplace.jpg" }, course_id: @course.id
-        expect(response).to redirect_to admin_course_chapters_path(@course.id)
+        expect(response).to redirect_to admin_course_path(@course.id)
       end
       it "creates a new chapter" do
         set_current_admin

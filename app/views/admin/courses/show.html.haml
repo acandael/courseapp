@@ -23,4 +23,5 @@
           %td= chapter.id
           %td
             = link_to chapter.title, admin_course_chapter_path(@course.id, chapter.id) 
-    
+  .large-3.columns
+    = link_to "Add Chapter", new_admin_course_chapter_path(@course.id), class: "button success"
