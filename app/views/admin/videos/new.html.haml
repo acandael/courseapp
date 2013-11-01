@@ -8,38 +8,45 @@
 .row
   .large-12.columns
     %h1 Add Video
-%form
+= form_for [:admin, @chapter, @video] do |f|
   .row
     .row
       .large-2.columns
-        %label(for="title") Video Title:
+        = f.label :title, "Video Title:"
       .large-6.columns
-        %input(type="text" id="title")
+        = f.text_field :title
       .large-4.columns
     .row
       .large-2.columns
-        %label(for="videoupload") Upload:
+        = f.label :description, "Video Description:"
       .large-6.columns
-        %input(type="file" id="videoupload")
+        = f.text_area :description, placeholder: "Enter a small description for this video"
+      .large-4.columns
+    .row
+      .large-2.columns
+        = f.label :video_url, "Upload video:"
+      .large-6.columns
+        = f.file_field :video_url
       .large-4.columns
     .row
       .large-12.columns
         %br
     .row
       .large-2.columns
-        %label(for="badgetagline") Duration:
+        Duration
       .large-1.columns
-        %input(type="text" id="mins")        
+        = f.number_field :mins
+      .large-2.columns
+        = f.label :mins, "Duration:"
       .large-1.columns
-        mins
+        = f.number_field :secs
       .large-1.columns
-        %input(type="text" id="secs") 
-      .large-1.columns
-        secs
-      .large-4.columns
+        = f.label :secs
+      .large-5.columns
+        &nbsp;
     .row
       .large-12.columns
         %br
       .row
         .large-6.columns
-          %input(type="submit" class="button success" value="Add Module")
+          %input(type="submit" class="button success" value="Add Video")

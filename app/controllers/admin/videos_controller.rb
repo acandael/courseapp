@@ -9,6 +9,7 @@ class Admin::VideosController < ApplicationController
 
   def create
     @video = Video.create(video_params(params[:video]))
+    @video.chapter_id = params[:chapter_id]
     if @video.save
       flash[:success] = "You created a new video, '#{ @video.title }' for chapter #{ @video.chapter_id }."
       redirect_to admin_chapter_path(@video.chapter_id)
