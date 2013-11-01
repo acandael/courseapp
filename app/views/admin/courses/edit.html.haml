@@ -1,9 +1,7 @@
 .row
   %ul.breadcrumbs
-    %li
-      %a(href="#") Home
-    %li
-      %a(href="courses.html") Courses
+    %li= link_to "Courses", admin_courses_path
+    %li= link_to @course.title, admin_course_path(@course.id)
     %li.current Edit Course
 .row
   .large-12.columns
@@ -22,4 +20,7 @@
         .large-7.columns
           = f.text_area :description, placeholder: "description for the course"
         .large-3.columns
-          = f.submit "Update Course", class: "button success"
+          &nbsp;
+      .row
+        .large-3.columns
+          = f.submit "Update Course", class: "button success radius"

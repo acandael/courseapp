@@ -174,6 +174,12 @@ describe Admin::CoursesController do
       delete :destroy, id: @course.id
       expect(Course.count).to eq(0)
     end
+    it "deletes associated chapters" do
+      set_current_admin
+      chapter1 = Fabricate(:chapter, course_id: @course_id)
+      delete :destroy, id: @course.id
+      expect(Chapter.count).to eq(0)
+    end
     it "set the flash message" do
       set_current_admin
       delete :destroy, id: @course.id

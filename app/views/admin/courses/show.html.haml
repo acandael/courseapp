@@ -4,27 +4,30 @@
       = link_to "Courses", admin_courses_path
     %li.current= @course.title 
 .row
+  %h3= @course.title 
   .large-12.columns
-    %h3= @course.title 
     .row
-      .large-9.columns
+      .large-7.columns
         %p= @course.description 
-      .large-3.columns
-        = link_to "Edit Course", edit_admin_course_path(@course.id), class: "button success"
-      .large-3.columns
-        = link_to "Delete Course", admin_course_path(@course.id), class: "button success", method: :delete
+      .large-5.columns
+        = link_to "Edit Course", edit_admin_course_path(@course.id), class: "button success radius"
+        &nbsp;
+        = link_to "Delete Course", admin_course_path(@course.id), class: "button alert radius", method: :delete, confirm: "Deleting a course will also delete all chapters. Proceed?"
 .row
-  %h4.subheader Chapters
-  .large-9.columns
-    %table.large-12.columns
-      %tr
-        %td Id
-        %td Chapter Title
-      - @course.chapters.each do |chapter|
+  - if @course.chapters.count != 0
+    %h4.subheader Chapters
+    .large-9.columns
+      %table.large-12.columns
         %tr
-          %td= chapter.id
-          %td
-            = link_to chapter.title, admin_course_chapter_path(@course.id, chapter.id) 
+          %td Id
+          %td Chapter Title
+        - @course.chapters.each do |chapter|
+          %tr
+            %td= chapter.id
+            %td
+              = link_to chapter.title, admin_course_chapter_path(@course.id, chapter.id) 
+  - else
+    %p This course has no chapters
   .large-3.columns
     = link_to "Add Chapter", new_admin_course_chapter_path(@course.id), class: "button success"
 

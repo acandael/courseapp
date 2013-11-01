@@ -12,7 +12,7 @@
   .large-12.columns
     %h3= @chapter.title
     .row
-      .large-9.columns
+      .large-7.columns
         %p
           %strong Description:
           = @chapter.description
@@ -22,10 +22,10 @@
         %p
           %strong Badge Image:
         = image_tag(@chapter.badge_image, class: 'th')
-      .large-3.columns
-        = link_to "Edit Chapter", edit_admin_course_chapter_path(@chapter.course_id, @chapter.id), class: "button success"
-        %br
-        = link_to "Delete Chapter", admin_course_chapter_path(@chapter.course_id, @chapter.id), method: :delete, class: "button success"
+      .large-5.columns
+        = link_to "Edit Chapter", edit_admin_course_chapter_path(@chapter.course_id, @chapter.id), class: "button success radius"
+        &nbsp;
+        = link_to "Delete Chapter", admin_course_chapter_path(@chapter.course_id, @chapter.id), method: :delete, class: "button alert radius"
     .row
       .large-12.columns
         &nbsp;

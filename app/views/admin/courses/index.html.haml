@@ -5,9 +5,8 @@
     %li.current
       %a(href="courses.html") Courses
 .row
-  .large-12.columns
-    = link_to "Add Course", new_admin_course_path, class: "button success"
-    %h3 Courses
+  %h3 Courses
+  .large-9.columns
     %table.large-12.columns
       %tr>
         %td Id
@@ -16,3 +15,6 @@
         %tr
           %td= course.id
           %td= link_to course.title, admin_course_path(course.id)
+  .large-3.columns
+    = link_to "Add Course", new_admin_course_path, class: "button success radius"
+

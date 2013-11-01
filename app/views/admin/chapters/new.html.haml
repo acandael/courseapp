@@ -3,9 +3,7 @@
     %li
       %a(href="#") Home
     %li
-      %a(href="modules.html") Course
-    %li
-      %a(href="modules.html") Chapters
+      = link_to @course.title, admin_course_path(@course.id)
     %li.current
       %a(href="#") Add Chapter
 .row
@@ -34,7 +32,7 @@
       .large-2.columns
         = f.label :badge_image, "Upload a badge image"
       .large-6.columns
-        = f.file_field :badge_image, class: "button"
+        = f.file_field :badge_image
       .large-4.columns
         &nbsp;
     .row
