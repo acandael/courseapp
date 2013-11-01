@@ -24,6 +24,8 @@
         = image_tag(@chapter.badge_image, class: 'th')
       .large-3.columns
         = link_to "Edit Chapter", edit_admin_course_chapter_path(@chapter.course_id, @chapter.id), class: "button success"
+        %br
+        = link_to "Delete Chapter", admin_course_chapter_path(@chapter.course_id, @chapter.id), method: :delete, class: "button success"
     .row
       .large-12.columns
         &nbsp;

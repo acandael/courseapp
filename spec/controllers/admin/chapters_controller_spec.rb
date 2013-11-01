@@ -194,4 +194,34 @@ describe Admin::ChaptersController do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    before do
+      @course = Fabricate(:course)
+      @chapter = Fabricate(:chapter, course_id: @course.id)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { delete :destroy, course_id: @course.id, id: @chapter.id  }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { post :update, course_id: @course.id, id: @chapter.id  }
+    end
+    context "with valid user" do
+      it "redirects to the course show page" do
+        set_current_admin
+        delete :destroy, course_id: @chapter.course_id, id: @chapter.id
+        expect(response).to redirect_to admin_course_path(@course.id)
+      end
+      it "deletes the chapter" do
+        set_current_admin
+        delete :destroy, course_id: @chapter.course_id, id: @chapter.id
+        expect(@course.chapters.count).to eq(0)
+      end
+      it "sets the flash success message" do
+        set_current_admin
+        delete :destroy, course_id: @chapter.course_id, id: @chapter.id
+        expect(flash[:success]).to be_present 
+      end
+    end
+  end
 end
