@@ -3,5 +3,6 @@ Fabricator :video do
   description { Faker::Lorem.paragraph(2) }
   mins { rand(1..60) }
   secs { rand(1..60) }
-  video_url "http://diikjwpmj92eg.cloudfront.net/mod0/teach/Mod0-1.introduction.mp4"
+  video_url File.open(File.join(Rails.root, '/spec/support/uploads/videos/helmet.mp4'))
+  chapter
 end

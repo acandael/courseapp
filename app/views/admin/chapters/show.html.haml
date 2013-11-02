@@ -37,20 +37,11 @@
             %td Id
             %td Video Title
             %td Duration
-          %tr
-            %td 1
-            %td
-              %a(href="#") Introduction
-            %td 2mins - 34secs
-          %tr
-            %td 2
-            %td
-              %a(href="#")Basic Security
-            %td 2mins - 34secs
-          %tr
-            %td 3
-            %td
-              %a(href="#") Hazards &amp; Risk Prevention
-            %td 2mins - 34secs
+          - @chapter.videos.each do |video|
+            %tr
+              %td= video.id 
+              %td
+                = link_to video.title, admin_chapter_video_path(@chapter.id, video.id) 
+              %td= "#{video.mins} - #{video.secs}"
       .large-3.columns
         = link_to "Add Video", new_admin_chapter_video_path(chapter_id: @chapter.id), class: "button success radius"

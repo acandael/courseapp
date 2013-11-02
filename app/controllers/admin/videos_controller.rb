@@ -1,10 +1,16 @@
 class Admin::VideosController < ApplicationController
   before_filter :require_user
   before_filter :require_admin
+
+  def show
+    @video = Video.find(params[:id])
+    @chapter = @video.chapter_id
+  end
   
   def new
     @video = Video.new
     @chapter = Chapter.find(params[:chapter_id])
+    @video.chapter_id = @chapter.id
   end
 
   def create

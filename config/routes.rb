@@ -7,19 +7,6 @@ Courseapp::Application.routes.draw do
   #     end
   #   end
   
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
   root to: "pages#front"
   get 'ui(/:action)', controller: 'ui'
   get 'pages/subscription_plans', controller: 'pages'
@@ -28,7 +15,7 @@ Courseapp::Application.routes.draw do
   get 'sign_out', to: 'sessions#destroy'
   get 'home', to: 'courses#index'
   get 'courses/:id/chapters/:chapter_id/video/:video_id', controller: 'chapters', action: 'show', as: 'show_video'
- 
+
   get 'quizzes/:id/question/:question_id', controller: 'quizzes', action: 'show', as: 'show_question'
   get 'quizzes/:id/quiz_success', controller: 'quizzes', action: 'complete', as: 'quiz_complete' 
   post 'answer/:id', controller: 'answers', action: 'check_answer', as: 'check_answer'

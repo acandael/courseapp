@@ -46,7 +46,6 @@ class Admin::ChaptersController < ApplicationController
 
   def destroy
     chapter = Chapter.find(params[:id])
-    require 'pry';binding.pry
     if chapter.destroy
     flash[:success] = "You successfully deleted chapter '#{chapter.title}'."
     redirect_to admin_course_path(chapter.course_id)
