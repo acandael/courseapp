@@ -25,7 +25,13 @@ class Admin::VideosController < ApplicationController
     end
   end
 
+  def edit
+    @video = Video.find(params[:id])
+    @chapter = Chapter.find(@video.chapter_id)
+  end
+
   def update
+    require 'pry';binding.pry
     @video = Video.find(params[:id])
     if @video.update(video_params(params[:video]))
       flash[:success] = "You successfully updated video '#{@video.title}'."
