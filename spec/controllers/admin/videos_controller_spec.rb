@@ -170,4 +170,35 @@ describe Admin::VideosController do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    before do
+      @chapter = Fabricate(:chapter)
+      @video = Fabricate(:video, chapter_id: @chapter.id )
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { delete :destroy, chapter_id: @chapter.id, id: @video.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { delete :destroy, chapter_id: @chapter.id, id: @video.id }
+    end
+    context "with valid user" do
+      it "redirects to the chapter show page" do
+        set_current_admin
+        delete :destroy, chapter_id: @chapter.id, id: @video.id
+        expect(response).to redirect_to admin_chapter_path(@chapter.id)
+      end
+      it "deletes the video" do
+        set_current_admin
+        delete :destroy, chapter_id: @chapter.id, id: @video.id
+        expect(@chapter.videos.count).to eq(0)
+      end
+      it "sets the flash success message" do
+        set_current_admin
+        delete :destroy, chapter_id: @chapter.id, id: @video.id
+        expect(flash[:success]).to be_present 
+      end
+
+    end
+  end
 end

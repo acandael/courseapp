@@ -41,6 +41,14 @@ class Admin::VideosController < ApplicationController
     end
   end
 
+  def destroy
+    video = Video.find(params[:id])
+    if video.destroy
+      flash[:success] = "You successfully deleted video #{ video.title}."
+      redirect_to admin_chapter_path(params[:chapter_id])
+    end
+  end
+
   private
 
   def require_admin
