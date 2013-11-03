@@ -49,7 +49,7 @@ class Admin::ChaptersController < ApplicationController
     if chapter.destroy
     flash[:success] = "You successfully deleted chapter '#{chapter.title}'."
     redirect_to admin_course_path(chapter.course_id)
-    end
+  end
 
   end
 

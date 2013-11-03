@@ -1,0 +1,31 @@
+.row
+  %ul.breadcrumbs
+    %li
+      = link_to "Courses", admin_courses_path
+    %li
+      = link_to @chapter.course.title, admin_course_path(@chapter.course_id)
+    %li
+      = link_to @chapter.title, admin_chapter_path(@chapter.id)
+    %li.unavailable Videos
+    %li.current
+      = @video.title
+.row
+  .large-12.columns
+    %h3= @video.title
+    .row
+      .large-7.columns
+        %p
+          %strong Description:
+          = @video.description
+        %p
+          %strong Duration:
+          = "#{@video.mins} mins - #{@video.secs} secs"
+        %p
+          %strong Video url:
+          = @video.video_url
+      .large-5.columns
+        = link_to "Edit Video", edit_admin_chapter_video_path(@video.chapter_id, @video.id), class: "button success radius"
+        &nbsp;
+        = link_to "Delete Video", admin_chapter_video_path(@video.chapter_id, @video.id), method: :delete, class: "button alert radius"
+     
+

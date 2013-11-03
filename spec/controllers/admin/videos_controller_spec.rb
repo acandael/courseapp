@@ -3,12 +3,37 @@ require 'spec_helper'
 describe Admin::VideosController do
   describe "GET #show" do
     before do
-      @course = Fabricate(:course)
-      @chapter = Fabricate(:chapter, course_id: @course.id)
+      @chapter = Fabricate(:chapter)
       @video = Fabricate(:video, chapter_id: @chapter.id)
     end
     it_behaves_like "requires sign in" do
       let(:action) { get :show, chapter_id: @chapter.id, id: @video.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { get :show, chapter_id: @chapter.id, id: @video.id }
+    end
+    context "with valid user" do
+      it "renders the :show template" do
+        set_current_admin
+        get :show, chapter_id: @chapter.id, id: @video.id
+        expect(response).to render_template :show
+      end
+      it "returns a video" do
+        set_current_admin
+        get :show, chapter_id: @chapter.id, id: @video.id
+        expect(assigns(:video)).to be_present 
+      end
+      it "returns a video for the chapter" do
+        set_current_admin
+        get :show, chapter_id: @chapter.id, id: @video.id
+        expect(assigns(:video).chapter_id).to eq(@video.chapter_id) 
+      end
+    end
+    context "with invalid user" do
+      it "redirects to the sign in page" do
+        get :show, chapter_id: @chapter.id, id: @video.id
+        expect(response).to redirect_to sign_in_path 
+      end
     end
   end
   describe "GET #new" do
@@ -76,6 +101,72 @@ describe Admin::VideosController do
         set_current_admin
         post :create, chapter_id: @chapter.id, video: { description: "what you should know about a safety helmet", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
         expect(flash[:error]).to be_present 
+      end
+    end
+  end
+
+  describe "PUT #update" do
+    before do
+      @course = Fabricate(:course)
+      @chapter = Fabricate(:chapter, course_id: @course.id)
+      @video = Fabricate(:video, chapter_id: @chapter.id )
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { put :update, chapter_id: @chapter.id, id: @video.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { put :update, chapter_id: @chapter.id, id: @video.id }
+    end
+    context "with valid input" do
+      it "redirects to the video show page" do
+        set_current_admin
+        @video.title = "new title"
+        put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "what you should know about a safety helmet", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
+        expect(response).to redirect_to admin_chapter_video_path(@video.chapter_id, @video.id) 
+      end
+      it "updates the video" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "what you should know about a safety helmet", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
+        @video.reload
+        expect(assigns(:video).title).to eq("new title") 
+      end
+      it "sets the flash success message" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "what you should know about a safety helmet", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
+        @video.reload
+        expect(flash[:success]).to be_present 
+      end
+    end
+    context "with invalid input" do
+      it "renders the :edit template" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
+        @video.reload
+        expect(response).to render_template :edit 
+      end
+      it "does not update the video" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
+        @video.reload
+        expect(Chapter.find(@chapter.id).description).not_to eq("") 
+      end
+      it "renders the :edit template" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
+        @video.reload
+        expect(response).to render_template :edit 
+      end
+      it "sets a flash error message" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
+        @video.reload
+        expect(flash[:error]).to be_present 
+      end
+      it "sets the @video" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
+        @video.reload
+        expect(assigns(:video)).to be_present 
       end
     end
   end

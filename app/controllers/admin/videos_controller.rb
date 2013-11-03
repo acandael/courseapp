@@ -4,7 +4,7 @@ class Admin::VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
-    @chapter = @video.chapter_id
+    @chapter = Chapter.find(@video.chapter_id)
   end
   
   def new
@@ -22,6 +22,17 @@ class Admin::VideosController < ApplicationController
     else
       flash[:error] = "The video could not be created. Please check the error messages."
       render :new
+    end
+  end
+
+  def update
+    @video = Video.find(params[:id])
+    if @video.update(video_params(params[:video]))
+      flash[:success] = "You successfully updated video '#{@video.title}'."
+      redirect_to admin_chapter_video_path(params[:chapter_id], params[:id])
+    else
+      flash[:error] = "The video was not updated. Please check the error messages."
+      render :edit
     end
   end
 
