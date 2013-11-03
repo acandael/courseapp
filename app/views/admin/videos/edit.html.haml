@@ -1,56 +1,58 @@
 .row
   %ul.breadcrumbs
     %li
-      %a(href="#") Home
+      = link_to "Courses", admin_courses_path 
     %li
-      %a(href="videos.html") Videos
+      = link_to @chapter.course.title, admin_course_path(@chapter.course_id)
     %li
-      %a(href="video.html") Video 1
-    %li.current
-      %a(href="#") Edit
-%form
-  .row
-    %h3.subheader= "Edit video: #{@video.title}"
-    = form_for [:admin, @chapter, @video], html: { multipart: true } do |f|
+      = link_to @chapter.title, admin_chapter_path(@chapter.id)
+    %li.unavailable Videos
+    %li.unavailable Edit
+    %li
+      = link_to @video.title, admin_chapter_video_path(@chapter.id, @video.id)
+
+.row
+  %h3.subheader= "Edit video: #{@video.title}"
+  = form_for [:admin, @chapter, @video], html: { multipart: true, class: "panel" } do |f|
+    .row
+      .large-12.columns
+      &nbsp;
+      .row
+        .large-2.columns
+          = f.label :title, "Video Title:"
+        .large-6.columns
+          = f.text_field :title 
+        .large-4.columns
+      .row
+        .large-2.columns
+          = f.label :description, "Video Description:"
+        .large-6.columns
+          = f.text_field :description 
+        .large-4.columns
+      .row
+        .large-2.columns
+          = f.label "Duration"
+        .large-1.columns
+          = f.number_field :mins 
+        .large-1.columns
+          = f.label :mins, "mins"
+        .large-1.columns
+          = f.number_field :secs
+        .large-1.columns
+          = f.label :secs, "secs"
+        .large-6.columns
+          &nbsp;
+      .row
+        .large-2.columns
+          = f.label :video_url, "Upload video:"
+        .large-4.columns
+          .flex-video
+            %iframe(width="420" height="315" src="#{ @video.video_url}" frameborder="0" allowfullscreen)
+        .large-6.columns
+          = f.file_field :video_url 
       .row
         .large-12.columns
-        &nbsp;
-        .row
-          .large-2.columns
-            = f.label :title, "Video Title:"
-          .large-6.columns
-            = f.text_field :title 
-          .large-4.columns
-        .row
-          .large-2.columns
-            = f.label :description, "Video Description:"
-          .large-6.columns
-            = f.text_field :description 
-          .large-4.columns
-        .row
-          .large-2.columns
-            = f.label "Duration"
-          .large-1.columns
-            = f.number_field :mins 
-          .large-1.columns
-            = f.label :mins, "mins"
-          .large-1.columns
-            = f.number_field :secs
-          .large-1.columns
-            = f.label :secs, "secs"
-          .large-6.columns
-            &nbsp;
-        .row
-          .large-2.columns
-            = f.label :video_url, "Upload video:"
-          .large-4.columns
-            .flex-video
-              %iframe(width="420" height="315" src="#{ @video.video_url}" frameborder="0" allowfullscreen)
-          .large-6.columns
-            = f.file_field :video_url 
-        .row
-          .large-12.columns
-            %br
-        .row
-          .large-6.columns
-            %input(type="submit" class="button success" value="Update Video")
+          %br
+      .row
+        .large-6.columns
+          %input(type="submit" class="button success radius" value="Update Video")

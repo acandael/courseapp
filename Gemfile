@@ -45,6 +45,8 @@ gem 'faker'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem 'carrierwave_direct', "~> 0.0.13"
+gem 'sidekiq'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

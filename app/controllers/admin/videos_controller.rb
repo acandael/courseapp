@@ -31,9 +31,8 @@ class Admin::VideosController < ApplicationController
   end
 
   def update
-    require 'pry';binding.pry
     @video = Video.find(params[:id])
-    if @video.update(video_params(params[:video]))
+    if @video.update_attributes(video_params(params[:video]))
       flash[:success] = "You successfully updated video '#{@video.title}'."
       redirect_to admin_chapter_video_path(params[:chapter_id], params[:id])
     else

@@ -20,9 +20,8 @@
         %p
           %strong Duration:
           = "#{@video.mins} mins - #{@video.secs} secs"
-        %p
-          %strong Video url:
-          = @video.video_url
+        .flex-video
+          %iframe(width="420" height="315" src="#{ @video.video_url}" frameborder="0" allowfullscreen)
       .large-5.columns
         = link_to "Edit Video", edit_admin_chapter_video_path(@video.chapter_id, @video.id), class: "button success radius"
         &nbsp;

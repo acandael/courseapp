@@ -17,4 +17,4 @@
 
 # Ignore temporary vim files
 *.swp
-/public/uploads
+/public/*

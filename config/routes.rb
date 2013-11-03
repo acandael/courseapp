@@ -1,12 +1,4 @@
 Courseapp::Application.routes.draw do
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-  
   root to: "pages#front"
   get 'ui(/:action)', controller: 'ui'
   get 'pages/subscription_plans', controller: 'pages'
