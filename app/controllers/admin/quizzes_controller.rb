@@ -15,6 +15,7 @@ class Admin::QuizzesController < ApplicationController
  
   def create
     @quiz = Quiz.create(quiz_params(params[:quiz]))
+    @quiz.chapter_id = params[:chapter_id]
     if @quiz.save 
       flash[:success] = "You successfully created a new quiz, #{ @quiz.title }."
       redirect_to admin_chapter_path(params[:chapter_id])
