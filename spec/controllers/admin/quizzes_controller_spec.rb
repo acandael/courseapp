@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe Admin::QuizzesController do
+  describe "GET #show" do
+    before do
+      @chapter = Fabricate(:chapter)
+      @quiz = Fabricate(:quiz, chapter_id: @chapter.id)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { get :show, chapter_id: @chapter.id, id: @quiz.id }
+    end
+  end
   describe "GET #new" do
     before do
       @chapter = Fabricate(:chapter)
