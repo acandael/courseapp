@@ -45,3 +45,14 @@
               %td= "#{video.mins} - #{video.secs}"
       .large-3.columns
         = link_to "Add Video", new_admin_chapter_video_path(chapter_id: @chapter.id), class: "button success radius"
+    .row
+      %h4.subheader Quiz
+      - if @chapter.quiz.present?
+        .large-9.columns
+          %table.large-12.columns
+            %tr
+              %td Id
+              %td Quiz Title
+      - else
+        = link_to "Add Quiz", new_admin_chapter_quiz_path(chapter_id: @chapter.id), class: "button success radius"
+        
