@@ -1,0 +1,30 @@
+.row
+  %ul.breadcrumbs
+    %li
+      = link_to "Courses", admin_courses_path
+    %li
+      = link_to @chapter.course.title, admin_course_path(@chapter.course_id)
+    %li
+      = link_to @chapter.title, admin_chapter_path(@chapter.id)
+    %li.unavailable Quiz
+    %li
+      = link_to @quiz.title, admin_quiz_path(@quiz.id)
+    %li.unavailable Questions
+    %li
+      = link_to @question.title, admin_quiz_question_path(@quiz.id, @question.id)
+    %li.current Edit
+.row
+  %h3.subheader= "Edit Question: #{@question.title}"
+  = form_for [:admin, @quiz, @question] do |f|
+    .row
+      .large-12.columns
+      &nbsp;
+      .row
+        .large-2.columns
+          = f.label :title, "Question:"
+        .large-6.columns
+          = f.text_field :title 
+        .large-4.columns
+      .row
+        .large-6.columns
+          %input(type="submit" class="button success radius" value="Update Question")

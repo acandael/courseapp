@@ -27,6 +27,23 @@ class Admin::QuestionsController < ApplicationController
     end
   end
 
+  def edit
+    @question = Question.find(params[:id])
+    @quiz = Quiz.find(params[:quiz_id])
+    @chapter = Chapter.find(@quiz.chapter_id)
+
+  end
+  
+  def update
+    @question = Question.find(params[:id])
+    if @question.update_attributes(question_params(params[:question]))
+      flash[:success] = "You successfully updated the question."
+      redirect_to admin_quiz_question_path(params[:quiz_id], params[:id])
+    else
+      flash[:error] = "The question was not updated. Please check the error messages."
+      render :edit
+    end
+  end
 
   private
 
