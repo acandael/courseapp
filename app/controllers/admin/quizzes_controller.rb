@@ -30,6 +30,11 @@ class Admin::QuizzesController < ApplicationController
     end
   end
 
+  def edit
+    @quiz = Quiz.find(params[:id])
+    @chapter = Chapter.find(params[:chapter_id])
+  end
+
   def update
     @quiz = Quiz.find(params[:id])
     if @quiz.update_attributes(quiz_params(params[:quiz]))
@@ -38,6 +43,14 @@ class Admin::QuizzesController < ApplicationController
     else
       flash[:error] = "The quiz was not updated. Please check the error messages."
       render :edit
+    end
+  end
+
+  def destroy
+    quiz = Quiz.find(params[:id])
+    if quiz.destroy
+      flash[:success] = "You successfully deleted the quiz: '#{quiz.title}'."
+      redirect_to admin_chapter_path(params[:chapter_id])  
     end
   end
 

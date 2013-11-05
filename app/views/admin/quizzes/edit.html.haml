@@ -1,7 +1,7 @@
 .row
   %ul.breadcrumbs
     %li= link_to "Courses", admin_courses_path
-    %li= link_to @course.title, admin_course_path(@course.id)
+    %li= link_to @chapter.course.title, admin_course_path(@chapter.course_id)
     %li.current Edit Course
 .row
   .large-12.columns

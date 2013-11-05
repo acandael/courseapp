@@ -187,6 +187,37 @@ describe Admin::QuizzesController do
         expect(assigns(:quiz)).to be_present
       end
     end
-
   end
+
+  describe "DELETE #destroy" do
+    before do
+      @chapter = Fabricate(:chapter)
+      @quiz = Fabricate(:quiz, chapter_id: @chapter.id)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { put :update, chapter_id: @chapter.id, id: @quiz.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { put :update, chapter_id: @chapter.id, id: @quiz.id }
+    end
+
+    context "with valid user" do
+     it "redirects to the chapter show page" do
+       set_current_admin
+       delete :destroy, chapter_id: @chapter.id, id: @quiz.id
+       expect(response).to redirect_to admin_chapter_path(@chapter.id)
+     end
+     it "deletes the quiz" do
+       set_current_admin
+       delete :destroy, chapter_id: @chapter.id, id: @quiz.id
+       expect(@chapter.quiz.present?).to be_false 
+     end
+     it "sets the flash success message" do
+       set_current_admin
+       delete :destroy, chapter_id: @chapter.id, id: @quiz.id
+       expect(flash[:success]).to be_present 
+     end
+    end
+  end
+
 end

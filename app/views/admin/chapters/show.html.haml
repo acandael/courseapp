@@ -56,6 +56,8 @@
             %tr
               %td= @chapter.quiz.id
               %td= link_to @chapter.quiz.title, admin_chapter_quiz_path(@chapter.id, @chapter.quiz.id)
+        .large-3.columns
+          = link_to "Delete Quiz", admin_chapter_quiz_path(@chapter.id, @chapter.quiz.id), method: :delete, class: "button alert radius"
       - else
         = link_to "Add Quiz", new_admin_chapter_quiz_path(chapter_id: @chapter.id), class: "button success radius"
         
