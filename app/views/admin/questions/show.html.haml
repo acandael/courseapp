@@ -9,6 +9,9 @@
     %li.unavailable Quiz
     %li
       = link_to @quiz.title, admin_quiz_path(@quiz.id)
+    %li.unavailable Questions
+    %li.current
+      = @question.title
 .row
   .large-12.columns
     %h3 
@@ -23,3 +26,4 @@
         = link_to "Edit Question", edit_admin_quiz_question_path(@question.quiz_id, @question.id), class: "button success radius"
         &nbsp;
         = link_to "Delete Question", admin_quiz_question_path(@question.quiz_id, @question.id), method: :delete, class: "button alert radius"
+     

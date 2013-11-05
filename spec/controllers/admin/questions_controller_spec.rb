@@ -171,4 +171,31 @@ describe Admin::QuestionsController do
       end
     end
   end
+  describe "DELETE #destroy" do
+    before do
+      @quiz = Fabricate(:quiz)
+      @question = Fabricate(:question, quiz_id: @quiz.id)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { delete :destroy, quiz_id: @quiz.id, id: @question.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { delete :destroy, quiz_id: @quiz.id, id: @question.id }
+    end
+    it "redirects to the quiz show page" do
+      set_current_admin
+      delete :destroy, quiz_id: @quiz.id, id: @question.id
+      expect(response).to redirect_to admin_quiz_path(@quiz.id)
+    end
+    it "deletes the question" do
+      set_current_admin
+      delete :destroy, quiz_id: @quiz.id, id: @question.id
+      expect(@quiz.questions.count).to eq(0)
+    end
+    it "sets the flash success message" do
+      set_current_admin
+      delete :destroy, quiz_id: @quiz.id, id: @question.id
+      expect(flash[:success]).to be_present
+    end
+  end
 end
