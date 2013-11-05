@@ -150,12 +150,6 @@ describe Admin::VideosController do
         @video.reload
         expect(Chapter.find(@chapter.id).description).not_to eq("") 
       end
-      it "renders the :edit template" do
-        set_current_admin
-        put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
-        @video.reload
-        expect(response).to render_template :edit 
-      end
       it "sets a flash error message" do
         set_current_admin
         put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }

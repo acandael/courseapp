@@ -9,6 +9,32 @@ describe Admin::QuizzesController do
     it_behaves_like "requires sign in" do
       let(:action) { get :show, chapter_id: @chapter.id, id: @quiz.id }
     end
+    it_behaves_like "requires admin" do
+      let(:action) { get :show, chapter_id: @chapter.id, id: @quiz.id }
+    end
+    context "with valid user" do
+      it "renders the :show template" do
+        set_current_admin
+        get :show, chapter_id: @chapter.id, id: @quiz.id
+        expect(response).to render_template :show
+      end
+      it "returns a quiz" do
+        set_current_admin
+        get :show, chapter_id: @chapter.id, id: @quiz.id
+        expect(assigns(:quiz)).to be_present 
+      end
+      it "returns a quiz for the chapter" do
+        set_current_admin
+        get :show, chapter_id: @chapter.id, id: @quiz.id
+        expect(assigns(:quiz).chapter_id).to eq(@quiz.chapter_id) 
+      end
+    end
+    context "with invalid user" do
+      it "redirects do the sign in page" do
+        get :show, chapter_id: @chapter.id, id: @quiz.id
+        expect(response).to redirect_to sign_in_path
+      end
+    end
   end
   describe "GET #new" do
     before do
@@ -69,17 +95,17 @@ describe Admin::QuizzesController do
     context "with valid input" do
       it "redirects to the chapter show page" do
         set_current_admin
-        post :create, chapter_id: @chapter.id, quiz: { title: "the safe workplace quiz", succcess_message: "congratiulations", chapter_id: @chapter.id }
+        post :create, chapter_id: @chapter.id, quiz: { title: "the safe workplace quiz", chapter_id: @chapter.id }
         expect(response).to redirect_to admin_chapter_path(@chapter.id)
       end
       it "creates a new quiz" do
         set_current_admin
-        post :create, chapter_id: @chapter.id, quiz: { title: "the safe workplace quiz", succcess_message: "congratiulations", chapter_id: @chapter.id }
+        post :create, chapter_id: @chapter.id, quiz: { title: "the safe workplace quiz", chapter_id: @chapter.id }
         expect(Quiz.count).to eq(1) 
       end
       it "set the flash success message" do
         set_current_admin
-        post :create, chapter_id: @chapter.id, quiz: { title: "the safe workplace quiz", succcess_message: "congratiulations", chapter_id: @chapter.id }
+        post :create, chapter_id: @chapter.id, quiz: { title: "the safe workplace quiz", chapter_id: @chapter.id }
         expect(flash[:success]).to be_present 
 
       end
@@ -93,19 +119,74 @@ describe Admin::QuizzesController do
       end
       it "renders the :new template" do
         set_current_admin
-        post :create, chapter_id: @chapter.id, quiz: { title: "", succcess_message: "congratiulations", chapter_id: @chapter.id }
+        post :create, chapter_id: @chapter.id, quiz: { title: "", chapter_id: @chapter.id }
         expect(response).to render_template :new 
       end
       it "sets the @quiz variable" do
         set_current_admin
-        post :create, chapter_id: @chapter.id, quiz: { title: "", succcess_message: "congratiulations", chapter_id: @chapter.id }
+        post :create, chapter_id: @chapter.id, quiz: { title: "", chapter_id: @chapter.id }
         expect(assigns(:quiz)).to be_present 
       end
       it "sets the flash error message" do
         set_current_admin
-        post :create, chapter_id: @chapter.id, quiz: { title: "", succcess_message: "congratiulations", chapter_id: @chapter.id }
+        post :create, chapter_id: @chapter.id, quiz: { title: "", chapter_id: @chapter.id }
         expect(flash[:error]).to be_present 
       end
     end
+  end
+
+  describe "PUT #update" do
+    before do
+      @chapter = Fabricate(:chapter)
+      @quiz = Fabricate(:quiz, chapter_id: @chapter.id)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { put :update, chapter_id: @chapter.id, id: @quiz.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { put :update, chapter_id: @chapter.id, id: @quiz.id }
+    end
+    context "with valid input" do
+      it "redirects to the quiz show page" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @quiz.id, quiz: { title: "the safe workplace quiz", chapter_id: @chapter.id }
+        expect(response).to redirect_to admin_chapter_quiz_path(@chapter.id, @quiz.id)
+      end
+      it "updates the quiz" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @quiz.id, quiz: { title: "the safe workplace quiz", chapter_id: @chapter.id }
+        @quiz.reload
+        expect(@quiz.title).to eq("the safe workplace quiz")
+      end
+      it "sets the flash success message" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @quiz.id, quiz: { title: "the safe workplace quiz", chapter_id: @chapter.id }
+        expect(flash[:success]).to be_present
+      end
+    end
+    context "with invalid input" do
+      it "renders the :edit template" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @quiz.id, quiz: { title: "", chapter_id: @chapter.id }
+        expect(response).to render_template :edit 
+      end
+      it "does not update the quiz" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @quiz.id, quiz: { title: "", chapter_id: @chapter.id }
+        @quiz.reload
+        expect(@quiz.title).not_to eq("") 
+      end
+      it "sets a flash error message" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @quiz.id, quiz: { title: "", chapter_id: @chapter.id }
+        expect(flash[:error]).to be_present
+      end
+      it "sets the @quiz" do
+        set_current_admin
+        put :update, chapter_id: @chapter.id, id: @quiz.id, quiz: { title: "", chapter_id: @chapter.id }
+        expect(assigns(:quiz)).to be_present
+      end
+    end
+
   end
 end

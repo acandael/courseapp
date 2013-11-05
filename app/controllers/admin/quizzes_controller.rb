@@ -2,6 +2,11 @@ class Admin::QuizzesController < ApplicationController
   before_filter :require_user
   before_filter :require_admin
 
+  def show
+    @quiz = Quiz.find(params[:id])
+    @chapter = Chapter.find(@quiz.chapter_id)
+  end
+
   def new
     @chapter = Chapter.find(params[:chapter_id])
     if @chapter.quiz.present?
@@ -25,6 +30,17 @@ class Admin::QuizzesController < ApplicationController
     end
   end
 
+  def update
+    @quiz = Quiz.find(params[:id])
+    if @quiz.update_attributes(quiz_params(params[:quiz]))
+      flash[:success] = "You successfully updated quiz: '#{@quiz.title}'."
+      redirect_to admin_chapter_quiz_path(params[:chapter_id], params[:id])
+    else
+      flash[:error] = "The quiz was not updated. Please check the error messages."
+      render :edit
+    end
+  end
+
   private
 
 
@@ -36,6 +52,6 @@ class Admin::QuizzesController < ApplicationController
   end
 
   def quiz_params(param)
-    params.require(:quiz).permit(:title, :success_message, :chapter_id)
+    params.require(:quiz).permit(:title, :chapter_id)
   end
 end
