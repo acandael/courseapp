@@ -10,6 +10,33 @@ describe Admin::AnswersController do
     it_behaves_like "requires sign in" do
       let(:action) { get :show, question_id: @question.id, id: @answer.id }
     end
+    it_behaves_like "requires admin" do
+      let(:action) { get :show, question_id: @question.id, id: @answer.id }
+    end
+
+    context "with valid user" do
+      it "renders the :show template" do
+        set_current_admin
+        get :show, question_id: @question.id, id: @answer.id
+        expect(response).to render_template :show
+      end
+      it "returns an answer" do
+        set_current_admin
+        get :show, question_id: @question.id, id: @answer.id
+        expect(assigns(:answer)).to be_present
+      end
+      it "returns a answer for the question" do
+        set_current_admin
+        get :show, question_id: @question.id, id: @answer.id
+        expect(assigns(:answer).question_id).to eq(@answer.question_id)
+      end
+    end
+    context "with invalid user" do
+      it "redirects to the sign in page" do
+        get :show, question_id: @question.id, id: @answer.id
+        expect(response).to redirect_to sign_in_path
+      end
+    end
   end
   describe "GET #new" do
     before do
@@ -58,7 +85,7 @@ describe Admin::AnswersController do
       it "redirects to the question show page" do
         set_current_admin
         post :create, question_id: @question.id, answer: { title: "David Heinemeier Hanson", is_correct: true }
-        expect(response).to redirect_to admin_question_path(@question.id)
+        expect(response).to redirect_to admin_quiz_question_path(@quiz.id, @question.id)
       end
       it "creates a new answer" do
         set_current_admin
@@ -97,6 +124,60 @@ describe Admin::AnswersController do
         set_current_admin
         post :create, question_id: @question.id, answer: { title: "", is_correct: true} 
         expect(flash[:error]).to be_present
+      end
+    end
+  end
+
+  describe "PUT #update" do
+    before do
+      @quiz = Fabricate(:quiz)
+      @question = Fabricate(:question, quiz_id: @quiz.id)
+      @answer = Fabricate(:answer, question_id: @question.id)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { put :update, question_id: @question.id, id: @answer.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { put :update, question_id: @question.id, id: @answer.id }
+    end
+    context "with valid input" do
+      it "redirects to the answer show page" do
+        set_current_admin
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "new title", is_correct: true }
+        expect(response).to redirect_to admin_question_answer_path(@question.id, @answer.id)
+      end
+      it "updates the answer" do
+        set_current_admin
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "new title", is_correct: true }
+        expect(assigns(:answer).title).to eq("new title")
+      end
+      it "sets the flash success message" do
+        set_current_admin
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "new title", is_correct: true }
+        expect(flash[:success]).to be_present
+      end
+    end
+    context "with invalid input" do
+      it "renders the :edit template" do
+        set_current_admin
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", is_correct: true }
+        expect(response).to render_template :edit
+      end
+      it "does not update the answer" do
+        set_current_admin
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", is_correct: true }
+        @answer.reload
+        expect(@answer.title).not_to eq("")
+      end
+      it "sets a flash error message" do
+        set_current_admin
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", is_correct: true }
+        expect(flash[:error]).to be_present
+      end
+      it "sets the @answer" do
+        set_current_admin
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", is_correct: true }
+        expect(assigns(:answer)).to be_present
       end
     end
   end

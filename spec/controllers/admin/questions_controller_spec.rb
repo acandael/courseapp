@@ -153,7 +153,7 @@ describe Admin::QuestionsController do
         put :update, quiz_id: @quiz.id, id: @question.id, question: { title: "" }
         expect(response).to render_template :edit
       end
-      it "does not update the video" do
+      it "does not update the question" do
         set_current_admin
         put :update, quiz_id: @quiz.id, id: @question.id, question: { title: "" }
         @question.reload

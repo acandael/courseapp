@@ -1,0 +1,29 @@
+.row
+  %ul.breadcrumbs
+    %li
+      = link_to @quiz.title, admin_quiz_path(@quiz.id)
+    %li.unavailable Questions
+    %li
+      = link_to @question.title, admin_quiz_question_path(@quiz.id, @question.id)
+    %li.current Edit
+.row
+  %h3.subheader= "Edit Answer: #{@answer.title}"
+  = form_for [:admin, @question, @answer] do |f|
+    .row
+      .large-12.columns
+      &nbsp;
+      .row
+        .large-2.columns
+          = f.label :title, "Answer:"
+        .large-6.columns
+          = f.text_field :title 
+        .large-4.columns
+      .row
+        .large-2.columns
+          = f.label :title, "Is correct:"
+        .large-6.columns
+          = f.check_box :is_correct 
+        .large-4.columns
+      .row
+        .large-6.columns
+          %input(type="submit" class="button success radius" value="Update Answer")
