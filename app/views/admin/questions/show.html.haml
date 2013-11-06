@@ -44,5 +44,6 @@
               = answer.is_correct
   - else
     %p this question has no answers
-    = link_to "Add Answer", new_admin_question_answer_path(@question.id), class: "button success radius"
+
+  = link_to "Add Answer", new_admin_question_answer_path(@question.id), class: "button success radius"
           

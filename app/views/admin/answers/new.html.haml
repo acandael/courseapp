@@ -1,12 +1,5 @@
 .row
   %ul.breadcrumbs
-    %li
-      = link_to "Courses", admin_courses_path
-    %li
-      = link_to @chapter.course.title, admin_course_path(@chapter.course_id)
-    %li.unavailable Chapters
-    %li
-      = link_to @chapter.title, admin_chapter_path(@chapter.id)
     %li.unavailable Quiz
     %li
       = link_to @quiz.title, admin_quiz_path(@quiz.id)
