@@ -46,5 +46,11 @@ Courseapp::Application.routes.draw do
       resources :questions
     end
   end
+  
+  namespace :admin do
+    resources :questions do
+      resources :answers
+    end
+  end
 
   end

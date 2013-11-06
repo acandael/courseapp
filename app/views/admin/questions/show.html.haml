@@ -26,4 +26,23 @@
         = link_to "Edit Question", edit_admin_quiz_question_path(@question.quiz_id, @question.id), class: "button success radius"
         &nbsp;
         = link_to "Delete Question", admin_quiz_question_path(@question.quiz_id, @question.id), method: :delete, class: "button alert radius"
-     
+.row
+  %h4.subheader Answers
+  - if @question.answers.count != 0
+    .large-9.columns
+      %table.large-12.columns
+        %tr
+          %td Id
+          %td Answer
+          %td Is correct?
+        - @question.answers.each do |answer| 
+          %tr
+            %td= answer.id
+            %td
+              = link_to answer.title, admin_question_answer_path(@question.id, answer.id)
+            %td
+              = answer.is_correct
+  - else
+    %p this question has no answers
+    = link_to "Add Answer", new_admin_question_answer_path(@question.id), class: "button success radius"
+          
