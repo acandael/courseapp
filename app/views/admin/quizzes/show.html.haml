@@ -5,7 +5,8 @@
     %li
       = link_to @chapter.course.title, admin_course_path(@chapter.course_id)
     %li.unavailable Chapters
-    %li= @chapter.title
+    %li
+      = link_to @chapter.title, admin_chapter_path(@chapter.id)
     %li.unavailable Quiz
     %li.current= @quiz.title
 .row

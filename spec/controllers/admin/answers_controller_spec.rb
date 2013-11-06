@@ -181,4 +181,31 @@ describe Admin::AnswersController do
       end
     end
   end
+  describe "DELETE #destroy" do
+    before do
+      @question = Fabricate(:question)
+      @answer = Fabricate(:answer, question_id: @question.id)
+    end
+    it_behaves_like "requires sign in" do
+      let(:action) { delete :destroy, question_id: @question.id, id: @answer.id }
+    end
+    it_behaves_like "requires admin" do
+      let(:action) { delete :destroy, question_id: @question.id, id: @answer.id }
+    end
+    it "redirects to the question show page" do
+      set_current_admin
+      delete :destroy, question_id: @question.id, id: @answer.id
+      expect(response).to redirect_to admin_question_path(@question.id)
+    end
+    it "deletes the answer" do
+      set_current_admin
+      delete :destroy, question_id: @question.id, id: @answer.id
+      expect(@question.answers.count).to eq(0)
+    end
+    it "sets the flash success message" do
+      set_current_admin
+      delete :destroy, question_id: @question.id, id: @answer.id
+      expect(flash[:success]).to be_present
+    end
+  end
 end

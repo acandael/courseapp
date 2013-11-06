@@ -11,7 +11,7 @@ class Admin::QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id]) 
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.find(@question.quiz_id)
     @chapter = Chapter.find(@quiz.chapter_id)
   end
 

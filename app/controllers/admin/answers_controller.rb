@@ -46,6 +46,14 @@ class Admin::AnswersController < ApplicationController
     end
   end
 
+  def destroy
+    answer = Answer.find(params[:id])
+    if answer.destroy
+      flash[:success] = "You successfully deleted the answer '#{answer.title}'."
+      redirect_to admin_question_path(params[:question_id])
+    end
+  end
+
   private
 
   
