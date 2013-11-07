@@ -43,7 +43,7 @@ describe Admin::CoursesController do
     it "sets the flash error message for regular user" do
       set_current_user
       get :new
-      expect(flash[:error]).to be_present
+      expect(flash[:alert]).to be_present
     end
   end
 
@@ -92,7 +92,7 @@ describe Admin::CoursesController do
       it "set the flash error message" do
         set_current_admin
         post :create, course: { description: "what you should know about a safe workplace" }
-        expect(flash[:error]).to be_present 
+        expect(flash[:alert]).to be_present 
       end
     end
   end
@@ -147,7 +147,7 @@ describe Admin::CoursesController do
         set_current_admin
         put :update, id: @course.id, course: { id: @course.id, title: "new title", description: nil } 
 
-        expect(flash[:error]).to be_present
+        expect(flash[:alert]).to be_present
       end
     end
   end
@@ -173,12 +173,6 @@ describe Admin::CoursesController do
       set_current_admin
       delete :destroy, id: @course.id
       expect(Course.count).to eq(0)
-    end
-    it "deletes associated chapters" do
-      set_current_admin
-      chapter1 = Fabricate(:chapter, course_id: @course_id)
-      delete :destroy, id: @course.id
-      expect(Chapter.count).to eq(0)
     end
     it "set the flash message" do
       set_current_admin

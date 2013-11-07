@@ -1,0 +1,39 @@
+.row
+  %ul.breadcrumbs
+    %li
+      = link_to "Courses", admin_courses_path
+    %li
+      = link_to @chapter.course.title, admin_course_path(@chapter.course_id)
+    %li.unavailable Chapters
+    %li
+      = link_to @chapter.title, admin_chapter_path(@chapter.id)
+    %li.unavailable Quiz
+    %li.current= @quiz.title
+.row
+  .large-7.columns
+    %h3= @quiz.title 
+  .large-5.columns
+    .row
+      = link_to "Edit Quiz", edit_admin_chapter_quiz_path(@quiz.chapter_id, @quiz.id), class: "button success radius"
+      &nbsp;
+      = link_to "Delete Quiz", admin_chapter_quiz_path(@quiz.chapter_id, @quiz.id), class: "button alert radius", method: :delete, confirm: "Deleting a quiz will also delete all questions and answers. Proceed?"
+.row
+  .large-12.columns
+    &nbsp;
+.row
+  %h4.subheader Questions
+  .large-9.columns
+    - if @quiz.questions.count !=0
+      %table.large-12.columns
+        %tr
+          %td Id
+          %td Question Title
+        - @quiz.questions.each do |question|
+          %tr
+            %td= question.id
+            %td
+              = link_to question.title, admin_quiz_question_path(@quiz.id, question.id)
+    - else
+      %p this quiz has no questions
+  .large-3.columns
+    = link_to "Add Question", new_admin_quiz_question_path(@quiz.id), class: "button success radius"

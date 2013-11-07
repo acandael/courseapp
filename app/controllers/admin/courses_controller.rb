@@ -24,7 +24,7 @@ class Admin::CoursesController < ApplicationController
       flash[:success] = "You successfully update course '#{ @course.title }'"
       redirect_to admin_courses_path
     else
-      flash[:error] = "You cannot update this record. Please check the errors."
+      flash[:alert] = "You cannot update this record. Please check the errors."
       render :edit 
     end
   end
@@ -35,7 +35,7 @@ class Admin::CoursesController < ApplicationController
       flash[:success] = "You successfully created the course '#{ @course.title }'"
       redirect_to admin_courses_path
     else
-      flash[:error] = "You cannot add this course. Please check the errors."
+      flash[:alert] = "You cannot add this course. Please check the errors."
       render :new
     end
   end
@@ -52,7 +52,7 @@ class Admin::CoursesController < ApplicationController
   
   def require_admin
     if !current_user.admin?
-      flash[:error] = "You are not authorized to do that."
+      flash[:alert] = "You are not authorized to do that."
       redirect_to home_path
     end
   end

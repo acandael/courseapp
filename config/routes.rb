@@ -37,6 +37,19 @@ Courseapp::Application.routes.draw do
   namespace :admin do
     resources :chapters do
       resources :videos
+      resources :quizzes
+    end
+  end
+
+  namespace :admin do
+    resources :quizzes do
+      resources :questions
+    end
+  end
+  
+  namespace :admin do
+    resources :questions do
+      resources :answers
     end
   end
 

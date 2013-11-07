@@ -16,11 +16,12 @@ class Admin::VideosController < ApplicationController
   def create
     @video = Video.create(video_params(params[:video]))
     @video.chapter_id = params[:chapter_id]
+    @chapter = Chapter.find(@video.chapter_id)
     if @video.save
       flash[:success] = "You created a new video, '#{ @video.title }' for chapter #{ @video.chapter_id }."
       redirect_to admin_chapter_path(@video.chapter_id)
     else
-      flash[:error] = "The video could not be created. Please check the error messages."
+      flash[:alert] = "The video could not be created. Please check the error messages."
       render :new
     end
   end
@@ -32,11 +33,12 @@ class Admin::VideosController < ApplicationController
 
   def update
     @video = Video.find(params[:id])
+    @chapter = Chapter.find(@video.chapter_id)
     if @video.update_attributes(video_params(params[:video]))
       flash[:success] = "You successfully updated video '#{@video.title}'."
       redirect_to admin_chapter_video_path(params[:chapter_id], params[:id])
     else
-      flash[:error] = "The video was not updated. Please check the error messages."
+      flash[:alert] = "The video was not updated. Please check the error messages."
       render :edit
     end
   end
@@ -53,7 +55,7 @@ class Admin::VideosController < ApplicationController
 
   def require_admin
     if !current_user.admin?
-      flash[:error] = "You are not authorized to do that."
+      flash[:alert] = "You are not authorized to do that."
       redirect_to home_path
     end
   end

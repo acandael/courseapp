@@ -1,0 +1,19 @@
+.row
+  %ul.breadcrumbs
+    %li
+      = link_to @quiz.title, admin_quiz_path(@quiz.id)
+.row
+  .large-12.columns
+    %h1 Add a question
+    = form_for [:admin, @quiz, @question] do |f|
+      = render 'shared/error_messages', target: @question
+      .row
+        .row
+          .large-2.columns
+            = f.label :title, "Question Title:"  
+          .large-6.columns
+            = f.text_field :title
+          .large-4.columns
+        .row
+          .large-6.columns
+            %input(type="submit" class="button success" value="Add Question")

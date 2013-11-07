@@ -1,0 +1,29 @@
+.row
+  %ul.breadcrumbs
+    %li.unavailable Quiz
+    %li
+      = link_to @quiz.title, admin_quiz_path(@quiz.id)
+    %li.unavailable Questions
+    %li
+      = link_to @question.title, admin_quiz_question_path(@quiz.id, @question.id)
+.row
+  .large-12.columns
+    %h1 Add an answer 
+    = form_for [:admin, @question, @answer] do |f|
+      = render 'shared/error_messages', target: @answer
+      .row
+        .row
+          .large-2.columns
+            = f.label :title, "Answer Title:"  
+          .large-6.columns
+            = f.text_field :title
+          .large-4.columns
+        .row
+          .large-2.columns
+            = f.label :is_correct, "Is correct?"  
+          .large-6.columns
+            = f.check_box :is_correct
+          .large-4.columns
+        .row
+          .large-6.columns
+            %input(type="submit" class="button success" value="Add Answer")

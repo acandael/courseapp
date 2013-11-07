@@ -13,6 +13,7 @@
 .row
   %h3.subheader Edit Chapter 1 #{ @chapter.title }
   = form_for [:admin, @course, @chapter], html: { multipart: true } do |f|
+    = render 'shared/error_messages', target: @chapter
     .row
       .large-12.columns
         &nbsp;

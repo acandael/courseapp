@@ -1,0 +1,27 @@
+.row
+  %ul.breadcrumbs
+    %li
+      = link_to @quiz.title, admin_quiz_path(@quiz.id)
+    %li.unavailable Questions
+    %li
+      = link_to @question.title, admin_quiz_question_path(@quiz.id, @question.id)
+    %li.unavailable Answers
+    %li.current
+      = @answer.title
+.row
+  .large-12.columns
+    %h3 
+      Answer 
+      = @answer.id
+    .row
+      .large-7.columns
+        %p
+          %strong Title:
+          = @answer.title
+        %p
+          %strong Is correct:
+          = @answer.is_correct 
+      .large-5.columns
+        = link_to "Edit Answer", edit_admin_question_answer_path(@question.id, @answer.id), class: "button success radius"
+        &nbsp;
+        = link_to "Delete Answer", admin_question_answer_path(@question.id, @answer.id), method: :delete, class: "button alert radius"

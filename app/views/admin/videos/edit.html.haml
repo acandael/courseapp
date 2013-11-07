@@ -14,6 +14,8 @@
 .row
   %h3.subheader= "Edit video: #{@video.title}"
   = form_for [:admin, @chapter, @video], html: { multipart: true, class: "panel" } do |f|
+
+    = render 'shared/error_messages', target: @video
     .row
       .large-12.columns
       &nbsp;

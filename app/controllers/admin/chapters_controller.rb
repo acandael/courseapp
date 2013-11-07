@@ -27,7 +27,7 @@ class Admin::ChaptersController < ApplicationController
       flash[:success] = "You successfully updated chapter '#{ @chapter.title }'."
       redirect_to admin_course_chapter_path(@chapter.course_id, @chapter.id)
     else
-      flash[:error] = "The chapter was not updated. Please check the error messages."
+      flash[:alert] = "The chapter was not updated. Please check the error messages."
       render :edit
     end
   end
@@ -35,11 +35,12 @@ class Admin::ChaptersController < ApplicationController
   def create
     @chapter = Chapter.create(chapter_params(params[:chapter]))
     @chapter.course_id = params[:course_id] 
+    @course = Course.find(@chapter.course_id)
     if @chapter.save
       flash[:success] = "You created a new chapter, '#{ @chapter.title }' for course #{ @chapter.course_id }"
       redirect_to admin_course_path(@chapter.course_id)
     else
-      flash[:error] = "You could not create a new chapter. Please check the error messages."
+      flash[:alert] = "You could not create a new chapter. Please check the error messages."
       render :new
     end
   end
@@ -57,7 +58,7 @@ class Admin::ChaptersController < ApplicationController
 
   def require_admin
     if !current_user.admin?
-      flash[:error] = "You are not authorized to do that."
+      flash[:alert] = "You are not authorized to do that."
       redirect_to home_path
     end
   end
