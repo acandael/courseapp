@@ -63,7 +63,7 @@ describe Admin::QuestionsController do
     it "set the flash error message for regular user" do
       set_current_user
       get :new, quiz_id: @quiz.id
-      expect(flash[:error]).to be_present
+      expect(flash[:alert]).to be_present
     end
   end
 
@@ -114,7 +114,7 @@ describe Admin::QuestionsController do
       it "sets the flash error message" do
         set_current_admin
         post :create, quiz_id: @quiz.id, question: { title: "", quiz_id: @quiz.id }
-        expect(flash[:error]).to be_present
+        expect(flash[:alert]).to be_present
       end
     end
   end
@@ -162,7 +162,7 @@ describe Admin::QuestionsController do
       it "sets a flash error message" do
         set_current_admin
         put :update, quiz_id: @quiz.id, id: @question.id, question: { title: "" }
-        expect(flash[:error]).to be_present
+        expect(flash[:alert]).to be_present
       end
       it "sets the @question" do
         set_current_admin

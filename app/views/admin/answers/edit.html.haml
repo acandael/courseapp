@@ -9,6 +9,7 @@
 .row
   %h3.subheader= "Edit Answer: #{@answer.title}"
   = form_for [:admin, @question, @answer] do |f|
+    = render 'shared/error_messages', target: @answer
     .row
       .large-12.columns
       &nbsp;

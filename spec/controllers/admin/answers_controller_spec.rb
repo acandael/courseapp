@@ -65,7 +65,7 @@ describe Admin::AnswersController do
     it "sets the flash error message for regular user" do
       set_current_user
       get :new, question_id: @question.id
-      expect(flash[:error]).to be_present
+      expect(flash[:alert]).to be_present
     end
   end
 
@@ -123,7 +123,7 @@ describe Admin::AnswersController do
       it "sets the flash error message" do
         set_current_admin
         post :create, question_id: @question.id, answer: { title: "", is_correct: true} 
-        expect(flash[:error]).to be_present
+        expect(flash[:alert]).to be_present
       end
     end
   end
@@ -172,7 +172,7 @@ describe Admin::AnswersController do
       it "sets a flash error message" do
         set_current_admin
         put :update, question_id: @question.id, id: @answer.id, answer: { title: "", is_correct: true }
-        expect(flash[:error]).to be_present
+        expect(flash[:alert]).to be_present
       end
       it "sets the @answer" do
         set_current_admin

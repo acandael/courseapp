@@ -79,7 +79,7 @@ describe Admin::ChaptersController do
     it "sets the flash error message for regular user" do
       set_current_user
       get :new, course_id: @course.id
-      expect(flash[:error]).to be_present
+      expect(flash[:alert]).to be_present
     end
   end
   describe "POST #create" do
@@ -134,7 +134,7 @@ describe Admin::ChaptersController do
         set_current_admin
         course = Fabricate(:course)
         post :create, chapter: { description: "what you should know about a safe workplace", course_id: course.id, tagline: "congratulations, you earned the safe workplace badge", badge_image: "safe_workplace.jpg" }, course_id: @course.id
-        expect(flash[:error]).to be_present 
+        expect(flash[:alert]).to be_present 
       end
     end
   end
@@ -185,7 +185,7 @@ describe Admin::ChaptersController do
       it "sets a flash error message" do
         set_current_admin
         put :update, course_id: @course.id, id: @chapter.id, chapter: { title: "new title", description: "", course_id: @chapter.course_id, tagline: @chapter.tagline, badge_image: @chapter.badge_image } 
-        expect(flash[:error]).to be_present 
+        expect(flash[:alert]).to be_present 
       end
       it "sets the @chapter" do
         set_current_admin

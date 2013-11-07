@@ -10,7 +10,7 @@ class Admin::QuizzesController < ApplicationController
   def new
     @chapter = Chapter.find(params[:chapter_id])
     if @chapter.quiz.present?
-      flash[:error] = "Chapter #{@chapter.title} already has a quiz"
+      flash[:alert] = "Chapter #{@chapter.title} already has a quiz"
       redirect_to admin_chapter_path(@chapter.id)
     else
       @quiz = Quiz.new
@@ -21,11 +21,12 @@ class Admin::QuizzesController < ApplicationController
   def create
     @quiz = Quiz.create(quiz_params(params[:quiz]))
     @quiz.chapter_id = params[:chapter_id]
+    @chapter = Chapter.find(@quiz.chapter_id)
     if @quiz.save 
       flash[:success] = "You successfully created a new quiz, #{ @quiz.title }."
       redirect_to admin_chapter_path(params[:chapter_id])
     else
-      flash[:error] = "The quiz was not created. Please check the error messages."
+      flash[:alert] = "The quiz was not created. Please check the error messages."
       render :new
     end
   end
@@ -37,11 +38,12 @@ class Admin::QuizzesController < ApplicationController
 
   def update
     @quiz = Quiz.find(params[:id])
+    @chapter = Chapter.find(@quiz.chapter_id)
     if @quiz.update_attributes(quiz_params(params[:quiz]))
       flash[:success] = "You successfully updated quiz: '#{@quiz.title}'."
       redirect_to admin_chapter_quiz_path(params[:chapter_id], params[:id])
     else
-      flash[:error] = "The quiz was not updated. Please check the error messages."
+      flash[:alert] = "The quiz was not updated. Please check the error messages."
       render :edit
     end
   end
@@ -59,7 +61,7 @@ class Admin::QuizzesController < ApplicationController
 
   def require_admin
     if !current_user.admin?
-      flash[:error] = "You are not authorized to do that."
+      flash[:alert] = "You are not authorized to do that."
       redirect_to home_path
     end
   end

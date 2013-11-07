@@ -62,7 +62,7 @@ describe Admin::QuizzesController do
       it "sets the flash error message for regular user" do
         set_current_user
         get :new, chapter_id: @chapter.id
-        expect(flash[:error]).to be_present
+        expect(flash[:alert]).to be_present
       end
     end
     context "chapter already has a quiz" do
@@ -70,7 +70,7 @@ describe Admin::QuizzesController do
         set_current_admin
         quiz2 = Fabricate(:quiz, chapter_id: @chapter.id)
         get :new, chapter_id: @chapter.id
-        expect(flash[:error]).to be_present 
+        expect(flash[:alert]).to be_present 
       end
       it "redirects to the chapter show template" do
         set_current_admin
@@ -130,7 +130,7 @@ describe Admin::QuizzesController do
       it "sets the flash error message" do
         set_current_admin
         post :create, chapter_id: @chapter.id, quiz: { title: "", chapter_id: @chapter.id }
-        expect(flash[:error]).to be_present 
+        expect(flash[:alert]).to be_present 
       end
     end
   end
@@ -179,7 +179,7 @@ describe Admin::QuizzesController do
       it "sets a flash error message" do
         set_current_admin
         put :update, chapter_id: @chapter.id, id: @quiz.id, quiz: { title: "", chapter_id: @chapter.id }
-        expect(flash[:error]).to be_present
+        expect(flash[:alert]).to be_present
       end
       it "sets the @quiz" do
         set_current_admin

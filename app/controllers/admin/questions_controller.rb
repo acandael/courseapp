@@ -18,11 +18,12 @@ class Admin::QuestionsController < ApplicationController
   def create
     @question = Question.create(question_params(params[:question]))
     @question.quiz_id = params[:quiz_id]
+    @quiz = Quiz.find(@question.quiz_id)
     if @question.save
       flash[:success] = "You successfully created the question: '#{@question.title}'."
       redirect_to admin_quiz_path(params[:quiz_id])
     else
-      flash[:error] = "The question was not created. Please check the error messages."
+      flash[:alert] = "The question was not created. Please check the error messages."
       render :new
     end
   end
@@ -36,11 +37,12 @@ class Admin::QuestionsController < ApplicationController
   
   def update
     @question = Question.find(params[:id])
+    @quiz = Quiz.find(@question.quiz_id)
     if @question.update_attributes(question_params(params[:question]))
       flash[:success] = "You successfully updated the question."
       redirect_to admin_quiz_question_path(params[:quiz_id], params[:id])
     else
-      flash[:error] = "The question was not updated. Please check the error messages."
+      flash[:alert] = "The question was not updated. Please check the error messages."
       render :edit
     end
   end
@@ -58,7 +60,7 @@ class Admin::QuestionsController < ApplicationController
 
   def require_admin
     if !current_user.admin?
-      flash[:error] = "You are not authorized to do that."
+      flash[:alert] = "You are not authorized to do that."
       redirect_to home_path
     end
   end

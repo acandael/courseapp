@@ -64,7 +64,7 @@ describe Admin::VideosController do
     it "sets the flash error message for regular user" do
       set_current_user
       get :new, chapter_id: @chapter.id
-      expect(flash[:error]).to be_present
+      expect(flash[:alert]).to be_present
     end
   end
   
@@ -100,7 +100,7 @@ describe Admin::VideosController do
       it "sets the flash error message" do
         set_current_admin
         post :create, chapter_id: @chapter.id, video: { description: "what you should know about a safety helmet", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
-        expect(flash[:error]).to be_present 
+        expect(flash[:alert]).to be_present 
       end
     end
   end
@@ -154,7 +154,7 @@ describe Admin::VideosController do
         set_current_admin
         put :update, chapter_id: @chapter.id, id: @video.id, video: { title: "new title", description: "", video_url: "http://diikjwpmj92eg.cloudfront.net/mod0/teach/safety_helmet.mp4", mins: 2, secs: 34, chapter_id: @chapter.id }
         @video.reload
-        expect(flash[:error]).to be_present 
+        expect(flash[:alert]).to be_present 
       end
       it "sets the @video" do
         set_current_admin

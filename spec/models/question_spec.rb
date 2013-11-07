@@ -21,4 +21,5 @@ describe Question do
     answer2 = Fabricate(:answer, question_id: question.id)
     expect(question.answers).to include(answer1, answer2)
   end
+
  end
