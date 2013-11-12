@@ -25,7 +25,7 @@
       .large-5.columns
         = link_to "Edit Question", edit_admin_quiz_question_path(@question.quiz_id, @question.id), class: "button success radius"
         &nbsp;
-        = link_to "Delete Question", admin_quiz_question_path(@question.quiz_id, @question.id), method: :delete, class: "button alert radius"
+        = link_to "Delete Question", admin_quiz_question_path(@question.quiz_id, @question.id), method: :delete, data: { text: "Are you sure you want to delete question '#{@question.title}'?" }, class: "button alert radius"
 .row
   %h4.subheader Answers
   - if @question.answers.count != 0

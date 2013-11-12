@@ -25,6 +25,6 @@
       .large-5.columns
         = link_to "Edit Video", edit_admin_chapter_video_path(@video.chapter_id, @video.id), class: "button success radius"
         &nbsp;
-        = link_to "Delete Video", admin_chapter_video_path(@video.chapter_id, @video.id), method: :delete, class: "button alert radius"
+        = link_to "Delete Video", admin_chapter_video_path(@video.chapter_id, @video.id), method: :delete, data: { text: "Are you sure you want to delete video '#{@video}?" }, class: "button alert radius"
      
 

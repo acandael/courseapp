@@ -12,7 +12,7 @@
       .large-5.columns
         = link_to "Edit Course", edit_admin_course_path(@course.id), class: "button success radius"
         &nbsp;
-        = link_to "Delete Course", admin_course_path(@course.id), class: "button alert radius", method: :delete, confirm: "Deleting a course will also delete all chapters. Proceed?"
+        = link_to "Delete Course", admin_course_path(@course.id), class: "button alert radius", method: :delete, data: { text: "Deleting a course will also delete all chapters. Proceed?" }
 .row
   - if @course.chapters.count != 0
     %h4.subheader Chapters

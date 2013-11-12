@@ -16,7 +16,7 @@
     .row
       = link_to "Edit Quiz", edit_admin_chapter_quiz_path(@quiz.chapter_id, @quiz.id), class: "button success radius"
       &nbsp;
-      = link_to "Delete Quiz", admin_chapter_quiz_path(@quiz.chapter_id, @quiz.id), class: "button alert radius", method: :delete, confirm: "Deleting a quiz will also delete all questions and answers. Proceed?"
+      = link_to "Delete Quiz", admin_chapter_quiz_path(@quiz.chapter_id, @quiz.id), class: "button alert radius", method: :delete, data: { text: "Deleting a quiz will also delete all questions and answers. Proceed?" }
 .row
   .large-12.columns
     &nbsp;

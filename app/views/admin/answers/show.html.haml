@@ -24,4 +24,4 @@
       .large-5.columns
         = link_to "Edit Answer", edit_admin_question_answer_path(@question.id, @answer.id), class: "button success radius"
         &nbsp;
-        = link_to "Delete Answer", admin_question_answer_path(@question.id, @answer.id), method: :delete, class: "button alert radius"
+        = link_to "Delete Answer", admin_question_answer_path(@question.id, @answer.id), method: :delete, data: { text: "Are you sure you want to delete the answer '#{@answer.title}'?" }, class: "button alert radius"
