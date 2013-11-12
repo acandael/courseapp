@@ -26,12 +26,4 @@ describe Answer do
     answer.is_correct = false
     expect(answer.is_correct).to be_false
   end
-
-  it "raises an exception when a second correct answer is added" do
-    question = Fabricate(:question)
-    answer1 = Fabricate(:answer, is_correct: true, question_id: question.id)
-    answer1.save
-    expect(Answer.create(is_correct: true, question_id: question.id)).to raise_error
-  end
-
 end

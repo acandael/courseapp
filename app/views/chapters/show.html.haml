@@ -32,7 +32,7 @@
             %td
               %i.fi-play-video
             %td 
-              = link_to video.title, show_video_path(id: @chapter.course_id, chapter_id: video.chapter_id, video_id: video.id) 
+              = link_to video.title, chapter_video_path(chapter_id: @chapter.id, id: video.id) 
             %td= "#{ video.mins } mins - #{ video.secs } secs"
             %td
               %i.fi-check

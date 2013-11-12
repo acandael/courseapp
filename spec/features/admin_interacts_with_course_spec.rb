@@ -17,10 +17,10 @@ feature "Admin interacts with course" do
 
   scenario "admin edits a course" do
     admin = Fabricate(:admin)
-    Fabricate(:course)
+    course = Fabricate(:course)
     sign_in(admin)
     visit admin_courses_path
-
+    find("a[href='/admin/courses/#{course.id}']").click
     click_link "Edit"
     find("input[@id='course_title']").set("a safer workplace")
     click_button "Update Course"
