@@ -1,4 +1,3 @@
-
 .row
   %ul.breadcrumbs
     %li
@@ -16,10 +15,10 @@
       %p
         %strong= @question.title 
       - if @question.answers != []
-        = form_for @answer, url: check_answer_path, method: :post, html: { class: "custom" } do |f|
+        = form_for [@quiz, @question], html: { class: "custom" } do |f|
           - @question.answers.each do |answer|
             %label 
-              = f.radio_button :title, answer.title
+              = f.radio_button :title, answer.title, checked: false
               %span.custom.radio
               = answer.title
             %br
