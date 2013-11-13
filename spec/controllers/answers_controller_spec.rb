@@ -3,6 +3,15 @@ require 'spec_helper'
 describe AnswersController do
   describe 'POST @check_answer' do
 
+    it "recieves the right answer" do
+      quiz = Fabricate(:quiz)
+      question1 = Fabricate(:question, quiz_id: quiz.id)
+      question2 = Fabricate(:question, quiz_id: quiz.id)
+      answer = Fabricate(:answer, question_id: question1.id)
+      post :check_answer, id: answer.id
+      expect(assigns(:answer)).to eq(answer)
+    end
+
     it "redirects to the next question" do
       quiz = Fabricate(:quiz)
       question1 = Fabricate(:question, quiz_id: quiz.id)

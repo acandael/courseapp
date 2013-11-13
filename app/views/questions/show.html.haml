@@ -1,0 +1,39 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="index.html") Home
+    %li
+      = link_to @course.title, course_path(@course.id) 
+    %li
+      = link_to @quiz.chapter.title, chapter_path(@quiz.chapter.id)
+    %li.current= @quiz.title 
+%header.row
+  %h1.subheader= @quiz.title 
+.row
+  .large-8.columns
+    .panel
+      %p
+        %strong= @question.title 
+      - if @question.answers != []
+        - @question.answers.each do |answer|
+          = form_for [@question, answer], html: { class: "custom" } do |f|
+
+            %label 
+              = f.radio_button :title, answer.title, checked: false
+              %span.custom.radio
+              = answer.title
+            %br
+            - if @question.answers.last == answer
+              = f.submit "Answer Question", class: "button"
+          
+      - else
+        %p no answers available
+  %aside.large-4.columns
+    .panel
+      %p
+        %i.fi-graph-trend
+        %strong Quiz
+        %br
+        Question 1 of 4
+      .progress.large-6.success
+        %span.meter(style="width: 20%")

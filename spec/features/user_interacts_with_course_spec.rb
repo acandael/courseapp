@@ -6,6 +6,7 @@ feature "User interacts with course" do
   end
   scenario "user starts chapter and watches videos" do
    chapter1 = Fabricate(:chapter, course_id: @course.id)
+   quiz1 = Fabricate(:quiz, chapter_id: chapter1.id)
    video1 = Fabricate(:video, chapter_id: chapter1.id)
 
    sign_in

@@ -21,9 +21,11 @@ Courseapp::Application.routes.draw do
   end
 
   resources :quizzes, only: [:show] do
+    resources :questions, only:[:show]
   end
 
-  resources :questions, only: [:show] do
+  resource :question do
+    resource :answer
   end
 
   resources :users, only: [:create]

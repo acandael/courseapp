@@ -10,12 +10,10 @@ class Question < ActiveRecord::Base
   def self.is_last?(question_id)
     question = Question.find(question_id)
     last_question = Question.last
-    
     if question.id == last_question.id 
       return true
     else
       return false
     end
   end
-  
 end

@@ -50,5 +50,14 @@ describe QuizzesController do
 
       expect(assigns(:question)).to eq(question2)
     end
+
+    it "renders the quiz_question path" do
+      course = Fabricate(:course)
+      chapter = Fabricate(:chapter, course_id: course.id)
+      quiz = Fabricate(:quiz, chapter_id: chapter.id)
+      question1 = Fabricate(:question, quiz_id: quiz.id)
+      get :show, id: quiz.id, question_id: question1.id
+      expect(response).to redirect_to quiz_question_path(quiz.id, question1.id)
+    end
   end
 end

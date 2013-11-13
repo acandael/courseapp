@@ -6,9 +6,11 @@ class QuizzesController < ApplicationController
     if params[:question_id].present?
       @question = Question.find(params[:question_id])
       @answer = @question.answers.first
+      redirect_to quiz_question_path(@quiz.id, @question.id)
     else
       @question = @quiz.questions.first  
       @answer = @question.answers.first
+      redirect_to quiz_question_path(@quiz.id, @question.id)
     end
 
   end

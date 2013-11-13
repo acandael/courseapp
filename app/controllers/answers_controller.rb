@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   def check_answer
-    answer = Answer.find(params[:id])
-    question = Question.find(answer.question_id)
+    @answer = Answer.find(params[:id])
+    question = Question.find(@answer.question_id)
     if Question.is_last?(question.id)
       redirect_to quiz_complete_path(id: question.quiz_id)
     else

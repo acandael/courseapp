@@ -25,7 +25,7 @@
       .large-5.columns
         = link_to "Edit Chapter", edit_admin_course_chapter_path(@chapter.course_id, @chapter.id), class: "button success radius"
         &nbsp;
-        = link_to "Delete Chapter", admin_course_chapter_path(@chapter.course_id, @chapter.id), method: :delete, data: { text: "Deleting a chapter will also delete all the quiz and all videos. Proceed?", class: "button alert radius"
+        = link_to "Delete Chapter", admin_course_chapter_path(@chapter.course_id, @chapter.id), method: :delete, data: { text: "Deleting a chapter will also delete all the quiz and all videos. Proceed?" }, class: "button alert radius"
     .row
       .large-12.columns
         &nbsp;
