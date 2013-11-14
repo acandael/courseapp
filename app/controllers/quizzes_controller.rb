@@ -1,4 +1,5 @@
 class QuizzesController < ApplicationController
+  before_filter :require_user
   def show
     @quiz = Quiz.find(params[:id])
     chapter = Chapter.find(@quiz.chapter_id)
