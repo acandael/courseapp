@@ -20,3 +20,6 @@
 
 /public/*
 /spec/support/uploads/*
+
+# Ignore simplecov reports
+/coverage/*
