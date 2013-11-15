@@ -22,4 +22,5 @@
 /spec/support/uploads/*
 
 # Ignore simplecov reports
-/coverage/*
+/coverage/*.html
+/coverage/*.json
