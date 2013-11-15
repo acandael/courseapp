@@ -13,7 +13,7 @@
       .row
         %h3.subheader= chapter.title 
         .large-4.columsn
-          %img.left(src="../images/fundamentals.png" width="126" height="126")
+          = image_tag(@course.image, class: "left")
         .large-8.columns
           %p= chapter.description 
           = link_to "Get started", chapter_path(chapter.id), class: "small button success right"
