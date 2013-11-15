@@ -26,4 +26,19 @@ describe Answer do
     answer.is_correct = false
     expect(answer.is_correct).to be_false
   end
+
+  it "can only have one correct answer" do
+    question = Fabricate(:question)
+    answer1 = Fabricate(:answer, is_correct: true, question_id: question.id)
+    answer2 = Fabricate(:answer, is_correct: true, question_id: question.id)
+    expect(question.answers.count).to eq(1) 
+  end 
+
+  it "sets is_correct to true when there is no other correct answer" do
+    question = Fabricate(:question)
+    answer1 = Fabricate(:answer, is_correct: false, question_id: question.id)
+    answer2 = Fabricate(:answer, is_correct: true, question_id: question.id)
+    expect(answer2.is_correct).to be_true 
+  end
+  
 end
