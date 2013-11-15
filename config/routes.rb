@@ -6,7 +6,6 @@ Courseapp::Application.routes.draw do
   get 'sign_in', to: 'sessions#new'
   get 'sign_out', to: 'sessions#destroy'
   get 'home', to: 'courses#index'
-  #get 'courses/:id/chapters/:chapter_id/video/:video_id', controller: 'chapters', action: 'show', as: 'show_video'
 
   get 'quizzes/:id/question/:question_id', controller: 'quizzes', action: 'show', as: 'show_question'
   get 'quizzes/:id/quiz_success', controller: 'quizzes', action: 'complete', as: 'quiz_complete' 

@@ -6,7 +6,7 @@
 .row
   .large-12.columns
     %h1 Edit Course
-    = form_for [:admin, @course] do |f|
+    = form_for [:admin, @course], html: { multipart: true } do |f|
       = render 'shared/error_messages', target: @course
       .row
         .large-2.columns
@@ -21,6 +21,13 @@
           = f.text_area :description, placeholder: "description for the course"
         .large-3.columns
           &nbsp;
+      .row
+        .large-2.columns
+          = f.label :image, "Course Image:"
+        .large-4.columns
+          = image_tag(@course.image)
+        .large-6.columns
+          = f.file_field :image
       .row
         .large-3.columns
           = f.submit "Update Course", class: "button success radius"
