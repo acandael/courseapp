@@ -6,7 +6,7 @@ describe Video do
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:mins) }
   it { should validate_presence_of(:secs) }
-  it { should validate_presence_of(:video_url) }
+  it { should validate_presence_of(:video) }
   it "saves itself" do
     video = Fabricate(:video)
     video.save

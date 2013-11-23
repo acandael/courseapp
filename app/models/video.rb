@@ -1,7 +1,7 @@
 class Video < ActiveRecord::Base
- mount_uploader :video_url, VideoUrlUploader 
+ mount_uploader :video, VideoUploader 
 
   belongs_to :chapter
-  validates_presence_of :title, :description, :mins, :secs, :video_url
+  validates_presence_of :title, :description, :mins, :secs, :video
 
 end

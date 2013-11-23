@@ -61,6 +61,6 @@ class Admin::VideosController < ApplicationController
   end
 
   def video_params(param)
-    params.require(:video).permit(:title, :description, :video_url, :mins, :secs, :chapter_id)
+    params.require(:video).permit(:title, :description, :remote_video, :mins, :secs, :chapter_id)
   end
 end

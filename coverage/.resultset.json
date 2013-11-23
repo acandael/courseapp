@@ -5,11 +5,31 @@
         1,
         null
       ],
+      "/Users/acandael/Sites/courseapp/app/models/video.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/acandael/Sites/courseapp/app/uploaders/video_uploader.rb": [
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        4,
+        null,
+        null
+      ],
       "/Users/acandael/Sites/courseapp/app/models/answer.rb": [
         1,
         1,
         1,
-        14,
+        1,
         null
       ],
       "/Users/acandael/Sites/courseapp/app/models/chapter.rb": [
@@ -88,28 +108,8 @@
         1,
         null,
         null
-      ],
-      "/Users/acandael/Sites/courseapp/app/models/video.rb": [
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null
-      ],
-      "/Users/acandael/Sites/courseapp/app/uploaders/video_url_uploader.rb": [
-        1,
-        null,
-        1,
-        1,
-        null,
-        1,
-        0,
-        null,
-        null
       ]
     },
-    "timestamp": 1384622205
+    "timestamp": 1385222204
   }
 }
