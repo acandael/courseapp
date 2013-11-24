@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   has_many :answers, dependent: :delete_all
   validates_presence_of :title
 
-  def self.subsequent_question(previous_question)
+  def self.next(previous_question)
     where("id > ?", previous_question).first
   end
 

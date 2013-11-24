@@ -99,8 +99,8 @@ describe Admin::AnswersController do
       end
       it "set the property is_correct" do
         set_current_admin
-        post :create, question_id: @question.id, answer: { title: "David Heinemeier Hanson", is_correct: true }
-        expect(assigns(:answer).is_correct?).to be_true
+        post :create, question_id: @question.id, answer: { title: "David Heinemeier Hanson", correct: true }
+        expect(assigns(:answer).correct?).to be_true
       end
     end
     context "with invalid input" do

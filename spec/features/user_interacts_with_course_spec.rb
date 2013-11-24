@@ -21,8 +21,8 @@ feature "User interacts with course" do
     quiz1 = Fabricate(:quiz, chapter_id: chapter1.id)
     question1 = Fabricate(:question, quiz_id: quiz1.id)
     question2 = Fabricate(:question, quiz_id: quiz1.id)
-    answer1 = Fabricate(:answer, is_correct: 1, question_id: question1.id)
-    answer2 = Fabricate(:answer, is_correct: 0, question_id: question2.id)
+    answer1 = Fabricate(:answer, correct: 1, question_id: question1.id)
+    answer2 = Fabricate(:answer, correct: 0, question_id: question2.id)
     question1.answers << answer1
     question2.answers << answer2
     quiz1.questions << question1 

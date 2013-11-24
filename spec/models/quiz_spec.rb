@@ -28,6 +28,6 @@ describe Quiz do
     question1 = Fabricate(:question, quiz_id: quiz.id)
     question2 = Fabricate(:question, quiz_id: quiz.id)
     question3 = Fabricate(:question, quiz_id: quiz.id)
-    expect(Question.subsequent_question(question1.id)).to eq(question2)
+    expect(Question.next(question1.id)).to eq(question2)
   end
 end
