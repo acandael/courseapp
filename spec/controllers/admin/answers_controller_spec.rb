@@ -106,23 +106,23 @@ describe Admin::AnswersController do
     context "with invalid input" do
       it "renders the :new template" do
         set_current_admin
-        post :create, question_id: @question.id, answer: { title: "", is_correct: true }
+        post :create, question_id: @question.id, answer: { title: "", correct: true }
         expect(response).to render_template :new
       end
       it "does not create a new answer" do
         set_current_admin
-        post :create, question_id: @question.id, answer: { title: "", is_correct: true }
+        post :create, question_id: @question.id, answer: { title: "", correct: true }
         expect(Answer.count).to eq(0)
       end
       it "sets the @answer variable" do
         set_current_admin
-        post :create, question_id: @question.id, answer: { title: "", is_correct: true} 
+        post :create, question_id: @question.id, answer: { title: "", correct: true} 
         expect(assigns(:answer)).to be_present
 
       end
       it "sets the flash error message" do
         set_current_admin
-        post :create, question_id: @question.id, answer: { title: "", is_correct: true} 
+        post :create, question_id: @question.id, answer: { title: "", correct: true} 
         expect(flash[:alert]).to be_present
       end
     end
@@ -160,23 +160,23 @@ describe Admin::AnswersController do
     context "with invalid input" do
       it "renders the :edit template" do
         set_current_admin
-        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", is_correct: true }
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", correct: true }
         expect(response).to render_template :edit
       end
       it "does not update the answer" do
         set_current_admin
-        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", is_correct: true }
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", correct: true }
         @answer.reload
         expect(@answer.title).not_to eq("")
       end
       it "sets a flash error message" do
         set_current_admin
-        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", is_correct: true }
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", correct: true }
         expect(flash[:alert]).to be_present
       end
       it "sets the @answer" do
         set_current_admin
-        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", is_correct: true }
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "", correct: true }
         expect(assigns(:answer)).to be_present
       end
     end

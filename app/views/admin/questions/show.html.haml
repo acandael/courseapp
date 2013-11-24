@@ -41,7 +41,7 @@
             %td
               = link_to answer.title, admin_question_answer_path(@question.id, answer.id)
             %td
-              = answer.is_correct
+              = answer.correct?
   - else
     %p this question has no answers
 
