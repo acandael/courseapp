@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
  has_secure_password validations: false
  validates :password, presence: true, length: { minimum: 6 }
 
- end
+ has_many :responses
+ has_many :answers, through: :responses
+end
