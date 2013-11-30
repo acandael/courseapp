@@ -15,14 +15,15 @@
       %p
         %strong= @question.title 
       - if @question.answers != []
-        = form_for [@quiz, @question], html: { class: "custom" } do |f|
-          - @question.answers.each do |answer|
+        - @question.answers.each do |answer|
+          = form_for [@question, answer], html: { class: "custom" } do |f|
             %label 
               = f.radio_button :title, answer.title, checked: false
               %span.custom.radio
               = answer.title
             %br
-          = f.submit "Answer Question", class: "button"
+            - if @question.answers.last == answer
+              = f.submit "Answer Question", class: "button"
       - else
         %p no answers available
   %aside.large-4.columns
