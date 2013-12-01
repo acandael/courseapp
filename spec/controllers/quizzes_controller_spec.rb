@@ -46,6 +46,23 @@ describe QuizzesController do
         get :show, id: @quiz.id
         expect(response).to render_template :show 
       end
+
+      it "removes user answers when retaking quiz" do
+        user = Fabricate(:user)
+        set_current_user user
+        course = Fabricate(:course)
+        chapter = Fabricate(:chapter, course_id: course.id)
+        quiz = Fabricate(:quiz, chapter_id: chapter.id)
+        question1 = Fabricate(:question, quiz_id: quiz.id)
+        question2 = Fabricate(:question, quiz_id: quiz.id)
+        question3 = Fabricate(:question, quiz_id: quiz.id)
+        answer1 = Fabricate(:answer, question_id: question1.id)
+        answer2 = Fabricate(:answer, question_id: question2.id)
+        answer3 = Fabricate(:answer, question_id: question3.id)
+        user.answers << [answer1, answer2, answer3]
+        get :retake, id: quiz.id
+        expect(user.answers.count).to eq(0)
+      end
     end
     context "with invalid user" do
       before do
