@@ -22,8 +22,7 @@
               %span.custom.radio
               = answer.title
             %br
-            - if @question.answers.last == answer
-              = f.submit "Answer Question", class: "button"
+            = f.submit "Answer Question", class: "button"
       - else
         %p no answers available
   %aside.large-4.columns

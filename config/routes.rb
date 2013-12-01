@@ -10,6 +10,7 @@ Courseapp::Application.routes.draw do
   get 'quizzes/:id/question/:question_id', controller: 'quizzes', action: 'show', as: 'show_question'
   get 'quizzes/:id/quiz_success', controller: 'quizzes', action: 'complete', as: 'quiz_complete' 
   get 'quizzes/:id/quiz_fail', controller: 'quizzes', action: 'fail', as: 'quiz_fail'
+  get 'quizzes/:id/quiz_retake', controller: 'quizzes', action: 'retake', as: 'quiz_retake'
   resources :courses, only: [:show] do
     resources :chapters, only: [:show]
   end

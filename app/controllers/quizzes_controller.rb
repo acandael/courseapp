@@ -23,4 +23,19 @@ class QuizzesController < ApplicationController
     @chapter = Chapter.find(@quiz.chapter_id)
     @course = Course.find(@chapter.course_id)
   end
+
+  def retake
+    @quiz = Quiz.find(params[:id])
+    remove_answers(@quiz.id)
+    redirect_to quiz_path(@quiz.id)
+  end
+
+  private
+
+  def remove_answers(quiz_id)
+    @quiz.questions.each do |question|
+      answer = current_user.answers.where("question_id = ?", question.id).first
+      current_user.answers.delete(answer)
+    end
+  end
 end
