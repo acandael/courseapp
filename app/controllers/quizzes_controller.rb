@@ -17,4 +17,10 @@ class QuizzesController < ApplicationController
     @chapter = Chapter.find(@quiz.chapter_id)
     @course = Course.find(@chapter.course_id)
   end
+
+  def fail
+    @quiz = Quiz.find(params[:id])
+    @chapter = Chapter.find(@quiz.chapter_id)
+    @course = Course.find(@chapter.course_id)
+  end
 end

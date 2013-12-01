@@ -5,27 +5,41 @@
         1,
         null
       ],
-      "/Users/acandael/Sites/courseapp/app/models/quiz.rb": [
+      "/Users/acandael/Sites/courseapp/app/controllers/questions_controller.rb": [
         1,
         1,
         1,
         1,
+        1,
+        1,
+        0,
+        null,
+        1,
+        0,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null
+      ],
+      "/Users/acandael/Sites/courseapp/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
         null,
         1,
         2,
-        2,
-        2,
-        4,
-        4,
-        3,
         null,
-        null,
-        2,
-        1,
         null,
         1,
-        null,
-        null,
         null
       ],
       "/Users/acandael/Sites/courseapp/app/models/answer.rb": [
@@ -98,6 +112,29 @@
         null,
         null
       ],
+      "/Users/acandael/Sites/courseapp/app/models/quiz.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        4,
+        4,
+        3,
+        null,
+        null,
+        1,
+        1,
+        null,
+        0,
+        null,
+        null,
+        null
+      ],
       "/Users/acandael/Sites/courseapp/app/models/user.rb": [
         1,
         1,
@@ -140,6 +177,6 @@
         null
       ]
     },
-    "timestamp": 1385839018
+    "timestamp": 1385896459
   }
 }

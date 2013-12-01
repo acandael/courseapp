@@ -7,7 +7,7 @@ class Quiz < ActiveRecord::Base
     quiz = Quiz.find(quiz_id)
     wrong_answers = 0
     quiz.questions.each do |question|
-      answer= user.answers.where("question_id = ?", question.id).first
+      answer = user.answers.where("question_id = ?", question.id).first
       if !answer.correct
         wrong_answers += 1
       end

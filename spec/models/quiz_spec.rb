@@ -40,7 +40,7 @@ describe Quiz do
     expect(Quiz.pass?(quiz.id, user)).to be_true
   end
 
-  it "doesn't pass the quize" do
+  it "doesn't pass the quiz" do
     quiz = Fabricate(:quiz)
     user = Fabricate(:user)
     question1 = Fabricate(:question, quiz_id: quiz.id)

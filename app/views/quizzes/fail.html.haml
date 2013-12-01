@@ -1,0 +1,27 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="index.html") Home
+    %li
+      = link_to @course.title, course_path(@course.id) 
+    %li
+      = link_to @chapter.title, chapter_path(@chapter.id)
+    %li(class="current") VCA Basic Security Quiz
+%header.row
+  %h1.subheader= @quiz.title 
+.row
+  .large-8.columns
+    %p.lead Too bad, you did not pass the quizz because you had more than two incorrect answers 
+    %p
+      %img.th.radius(src="../images/templating.png")
+    %p
+      = link_to "Retake Quiz", quiz_path(@quiz.id), class: "button succes"
+  %aside.large-4.columns
+    .panel
+      %p
+        %i.foundicongen-graph
+        %strong Quiz
+        %br
+        Complete, your earnt 250 points
+      .progress.large-6.success
+        %span.meter(style="width: 100%")

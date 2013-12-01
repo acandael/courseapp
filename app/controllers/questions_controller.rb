@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
     if @question != nil
       redirect_to quiz_path(@quiz.id, question_id: @question.id)
     else
-      if Quiz.pass?(@quiz.id)
+      if Quiz.pass?(@quiz.id, current_user)
         redirect_to quiz_complete_path(@quiz.id)
       else
         redirect_to quiz_fail_path(@quiz.id)
