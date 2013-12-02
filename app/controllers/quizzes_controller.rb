@@ -4,11 +4,10 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find(params[:id])
     chapter = Chapter.find(@quiz.chapter_id)
     @course = Course.find(chapter.course_id)
-    remove_answers(@quiz.id) #remove answers from previous quiz attempt
     if params[:question_id].present?
       @question = Question.find(params[:question_id])
     else
-      @question = @quiz.questions.first  
+      @question = @quiz.questions.sort.first  
     end
 
   end
@@ -27,18 +26,16 @@ class QuizzesController < ApplicationController
 
   def retake
     @quiz = Quiz.find(params[:id])
-    remove_answers(@quiz.id)
+    remove_answers
     redirect_to quiz_path(@quiz.id)
   end
 
   private
 
-  def remove_answers(quiz_id)
+  def remove_answers
     @quiz.questions.each do |question|
-      if current_user.answers.include?(question.id)
-        answer = current_user.answers.where("question_id = ?", question.id).first != nil
+        answer = current_user.answers.where("question_id = ?", question.id).first
         current_user.answers.delete(answer)
-      end
     end
   end
 end

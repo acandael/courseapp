@@ -52,4 +52,11 @@ describe Quiz do
     user.answers << [ answer1, answer2, answer3 ]
     expect(Quiz.pass?(quiz.id, user)).to be_false
   end
+
+  it "marks the quiz as complete for user" do
+    quiz = Fabricate(:quiz)
+    user = Fabricate(:user)
+    Quiz.complete(user, quiz)
+    expect(user.quizzes.first).to eq(quiz)
+  end
 end

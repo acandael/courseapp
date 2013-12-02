@@ -50,6 +50,21 @@ describe QuestionsController do
         expect(response).to redirect_to quiz_fail_path(@quiz.id)
       end
 
+      it "marks the quiz as complete when the user passed the quiz" do
+        user = Fabricate(:user)
+        set_current_user user
+        @quiz.questions = []
+        question1 = Fabricate(:question, quiz_id: @quiz.id)
+        question2 = Fabricate(:question, quiz_id: @quiz.id)
+        question3 = Fabricate(:question, quiz_id: @quiz.id)
+        answer1 = Fabricate(:answer, correct: true, question_id: question1.id)
+        answer2 = Fabricate(:answer, correct: true, question_id: question2.id)
+        answer3 = Fabricate(:answer, correct: true, question_id: question3.id)
+        user.answers << [answer1, answer2, answer3]
+        get :show, quiz_id: @quiz.id, id: question3.id
+        expect(user.quizzes.first).to eq(@quiz) 
+      end
+
       
     end
     context "with invalid user" do

@@ -4,6 +4,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :title
 
   def self.next(previous_question)
+    Question.order(:id)
     where("id > ?", previous_question).first
   end
 

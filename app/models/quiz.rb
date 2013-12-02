@@ -3,6 +3,9 @@ class Quiz < ActiveRecord::Base
   has_many :questions, dependent: :delete_all
   validates_presence_of :title
 
+  has_many :quiz_completions
+  has_many :users, through: :quiz_completions
+
   def self.pass?(quiz_id, user)
     quiz = Quiz.find(quiz_id)
     wrong_answers = 0
@@ -17,5 +20,9 @@ class Quiz < ActiveRecord::Base
     else
       return true
     end
+  end
+
+  def self.complete(user, quiz)
+   user.quizzes << quiz 
   end
 end
