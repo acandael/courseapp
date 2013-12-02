@@ -4,6 +4,7 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find(params[:id])
     chapter = Chapter.find(@quiz.chapter_id)
     @course = Course.find(chapter.course_id)
+    remove_answers(@quiz.id) #remove answers from previous quiz attempt
     if params[:question_id].present?
       @question = Question.find(params[:question_id])
     else
@@ -34,8 +35,10 @@ class QuizzesController < ApplicationController
 
   def remove_answers(quiz_id)
     @quiz.questions.each do |question|
-      answer = current_user.answers.where("question_id = ?", question.id).first
-      current_user.answers.delete(answer)
+      if current_user.answers.include?(question.id)
+        answer = current_user.answers.where("question_id = ?", question.id).first != nil
+        current_user.answers.delete(answer)
+      end
     end
   end
 end
