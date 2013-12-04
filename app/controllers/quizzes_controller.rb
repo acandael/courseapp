@@ -35,7 +35,9 @@ class QuizzesController < ApplicationController
   def remove_answers
     @quiz.questions.each do |question|
         answer = current_user.answers.where("question_id = ?", question.id).first
-        current_user.answers.delete(answer)
+        if answer != nil
+          current_user.answers.delete(answer)
+        end
     end
   end
 end
