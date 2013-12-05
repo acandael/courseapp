@@ -53,7 +53,9 @@
   .large-4.columns
     %aside
       .panel
-        %img(src="../images/templating.png")
+        = image_tag @chapter.badge_image.url(:thumb), class: "left" if @chapter.badge_image?
+        %p
+          &nbsp;
         %h4= @chapter.title 
         %p
           %strong
