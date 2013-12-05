@@ -17,6 +17,7 @@
       .row
         %h3.subheader= chapter.title 
         .large-4.columsn
+          = image_tag chapter.badge_image.url(:small_thumb), class: "left" if chapter.badge_image?
         .large-8.columns
           %p= chapter.description 
           = link_to "Get started", chapter_path(chapter.id), class: "small button success right"
