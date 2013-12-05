@@ -5,12 +5,7 @@ class Evaluation
   end
 
   def pass?
-    if wrong_answers > 2
-      return false
-    else
-      complete
-      return true
-    end
+    complete and return true if wrong_answers <= 2
   end
 
   private
@@ -20,10 +15,9 @@ class Evaluation
     wrong_answers = 0
     @quiz.questions.each do |question|
       answer = @user.answers.where("question_id = ?", question.id).first
-      if !answer.correct
-        wrong_answers += 1
-      end
+      wrong_answers += 1 unless answer.correct
     end
+
     return wrong_answers
   end
 
