@@ -33,7 +33,7 @@ feature "User interacts with course" do
      
     sign_in
     find("a[href='/chapters/#{chapter1.id}']").click
-    click_link "Take the quiz"
+    click_link "Take quiz"
     page.should have_content quiz1.title
 
     choose(answer1.title)

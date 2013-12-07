@@ -24,11 +24,7 @@ Courseapp::Application.routes.draw do
     resources :questions, only:[:show, :update]
   end
 
-  resources :questions, only: [:show] do
-    resources :answers, only: [:update]
-  end
-
-  
+  post 'update_answer', to: 'answers#update'  
 
   resources :users, only: [:create]
   resources :sessions, only: [:create]

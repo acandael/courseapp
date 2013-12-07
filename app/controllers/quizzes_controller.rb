@@ -26,7 +26,7 @@ class QuizzesController < ApplicationController
 
   def retake
     @quiz = Quiz.find(params[:id])
-    remove_quiz
+    remove_quiz if current_user.quizzes != []
     remove_answers
     redirect_to quiz_path(@quiz.id)
   end
