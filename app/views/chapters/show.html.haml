@@ -43,7 +43,7 @@
             - if quiz_complete(current_user, @chapter.quiz.id)
               = link_to "Retake quiz", quiz_retake_path(@chapter.quiz.id), confirm: "this will remove you previous quiz data, are you sure?", class: "small button"
             - else
-              = link_to "Take quiz", quiz_path(@chapter.quiz.id), class: "small button"
+              = link_to "Take quiz", quiz_path(@chapter.quiz.id), class: "button radius"
 
           %td
             &nbsp;

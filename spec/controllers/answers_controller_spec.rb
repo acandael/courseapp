@@ -18,10 +18,10 @@ describe AnswersController do
         expect(user.answers.first).to eq(@answer)
       end
 
-      it "redirects to questions#show" do
+      it "renders the update template" do
         set_current_user
         put :update, question_id: @question.id, id: @answer.id
-        expect(response).to redirect_to quiz_question_path(@quiz.id, @question.id)
+        expect(response).to render_template :update 
       end
     end
   end

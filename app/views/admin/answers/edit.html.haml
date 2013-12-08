@@ -16,15 +16,21 @@
       .row
         .large-2.columns
           = f.label :title, "Answer:"
-        .large-6.columns
+        .large-8.columns
           = f.text_field :title 
-        .large-4.columns
+        .large-2.columns
       .row
         .large-2.columns
           = f.label :title, "Is correct:"
         .large-6.columns
           = f.check_box :correct 
         .large-4.columns
+      .row
+        .large-2.columns
+          = f.label :feedback, "Feedback:"
+        .large-8.columns
+          = f.text_area :feedback
+        .large-2.columns
       .row
         .large-6.columns
           %input(type="submit" class="button success radius" value="Update Answer")

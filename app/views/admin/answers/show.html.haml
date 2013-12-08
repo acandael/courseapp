@@ -21,6 +21,9 @@
         %p
           %strong Is correct:
           = @answer.correct 
+        %p
+          %strong Feedback:
+          = @answer.feedback
       .large-5.columns
         = link_to "Edit Answer", edit_admin_question_answer_path(@question.id, @answer.id), class: "button success radius"
         &nbsp;

@@ -1,0 +1,33 @@
+.row
+  %ul.breadcrumbs
+    %li
+      %a(href="index.html") Home
+    %li
+      = link_to @quiz.chapter.title, chapter_path(@quiz.chapter.id)
+    %li.current= @quiz.title 
+%header.row
+  %h1.subheader= @quiz.title 
+.row
+  .large-8.columns
+    .panel
+      %p
+        %strong= @question.title 
+      %p 
+        - if @answer.correct?
+          %i.fi-check(style="color: #5da423;")
+          &nbsp; #{ @answer.feedback }
+        - else
+          %i.fi-x(style="color: #c60f13;")
+          &nbsp; #{ @answer.feedback }
+          
+
+      = link_to "Continue", quiz_question_path(@quiz.id, @question.id), class: "button radius"
+  %aside.large-4.columns
+    .panel
+      %p
+        %i.fi-graph-trend(style="font-size: larger;color: #2ba6cb;")
+        %strong Quiz
+        %br
+        = quiz_status(@question)
+      .progress.large-6.success
+        %span.meter(style="width: #{percentage_completed(@question)}%")
