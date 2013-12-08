@@ -11,6 +11,7 @@ Courseapp::Application.routes.draw do
   get 'quizzes/:id/quiz_success', controller: 'quizzes', action: 'complete', as: 'quiz_complete' 
   get 'quizzes/:id/quiz_fail', controller: 'quizzes', action: 'fail', as: 'quiz_fail'
   get 'quizzes/:id/quiz_retake', controller: 'quizzes', action: 'retake', as: 'quiz_retake'
+  post 'update_answer', to: 'answers#update'  
   resources :courses, only: [:show] do
     resources :chapters, only: [:show]
   end
@@ -23,8 +24,6 @@ Courseapp::Application.routes.draw do
   resources :quizzes, only: [:show] do
     resources :questions, only:[:show, :update]
   end
-
-  post 'update_answer', to: 'answers#update'  
 
   resources :users, only: [:create]
   resources :sessions, only: [:create]
