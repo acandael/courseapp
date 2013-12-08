@@ -89,8 +89,13 @@ describe Admin::AnswersController do
       end
       it "creates a new answer" do
         set_current_admin
-        post :create, question_id: @question.id, answer: { title: "David Heinemeier Hanson", is_correct: true }
+        post :create, question_id: @question.id, answer: { title: "david heinemeier hanson", is_correct: true, feedback: "this is feedback" }
         expect(Answer.count).to eq(1)
+      end
+      it "sets the feedback" do
+        set_current_admin
+        post :create, question_id: @question.id, answer: { title: "David Heinemeier Hanson", is_correct: true, feedback: "this is feedback" }
+        expect(Answer.first.feedback).to eq("this is feedback") 
       end
       it "sets the flash success message" do
         set_current_admin
@@ -148,8 +153,13 @@ describe Admin::AnswersController do
       end
       it "updates the answer" do
         set_current_admin
-        put :update, question_id: @question.id, id: @answer.id, answer: { title: "new title", is_correct: true }
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "new title", is_correct: true, feedback: "this is feedback" }
         expect(assigns(:answer).title).to eq("new title")
+      end
+      it "updates the answer's feedback" do
+        set_current_admin
+        put :update, question_id: @question.id, id: @answer.id, answer: { title: "new title", is_correct: true, feedback: "this is feedback" }
+        expect(assigns(:answer).feedback).to eq("this is feedback")
       end
       it "sets the flash success message" do
         set_current_admin
