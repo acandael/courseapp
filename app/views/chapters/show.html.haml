@@ -35,7 +35,8 @@
               = link_to video.title, chapter_video_path(chapter_id: @chapter.id, id: video.id) 
             %td= "#{ video.mins } mins - #{ video.secs } secs"
             %td
-              %i.fi-check
+              - if current_user.videos.include?(video)
+                %i.fi-check
         %tr
           %td
             &nbsp;

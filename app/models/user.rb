@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
  has_many :answers, through: :responses
  has_many :quiz_completions
  has_many :quizzes, through: :quiz_completions
+ has_many :watches
+ has_many :videos, through: :watches
 end
