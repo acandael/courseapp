@@ -14,4 +14,15 @@ module ApplicationHelper
     questions = quiz.questions.sort
     ((questions.index(question) + 1) * 100) / questions.count
   end
+
+  def total_time(chapter)
+    min = 0
+    sec = 0
+    chapter.videos.each do |video|
+      min += video.mins
+      sec += video.secs
+    end
+    secs = (min * 60) + sec 
+    Time.at(secs).utc.strftime("%H:%M:%S")
+  end
 end
