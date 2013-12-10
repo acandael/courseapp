@@ -14,7 +14,7 @@ class Admin::VideosController < ApplicationController
   end
 
   def create
-    @video = Video.create(video_params(params[:video]))
+    @video = Video.create(video_params)
     @video.chapter_id = params[:chapter_id]
     @chapter = Chapter.find(@video.chapter_id)
     if @video.save
@@ -34,7 +34,7 @@ class Admin::VideosController < ApplicationController
   def update
     @video = Video.find(params[:id])
     @chapter = Chapter.find(@video.chapter_id)
-    if @video.update_attributes(video_params(params[:video]))
+    if @video.update_attributes(video_params)
       flash[:success] = "You successfully updated video '#{@video.title}'."
       redirect_to admin_chapter_video_path(params[:chapter_id], params[:id])
     else
@@ -60,7 +60,7 @@ class Admin::VideosController < ApplicationController
     end
   end
 
-  def video_params(param)
-    params.require(:video).permit(:title, :description, :remote_video_url, :mins, :secs, :chapter_id)
+  def video_params
+    params.require(:video).permit(:title, :description, :video, :mins, :secs, :chapter_id)
   end
 end

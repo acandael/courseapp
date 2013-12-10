@@ -10,20 +10,31 @@
     %h1.subheader= @chapter.title 
 .row
   .large-8.columns
-    .flex-video
+    .flex-video(id="mediaplayer")
       -if @chapter.videos != []
         - if @video
-          %iframe(width="420" height="315" src="#{ @video.video }" frameborder="0" allowfullscreen)
+          %script(type="text/javascript")
+            jwplayer('mediaplayer').setup({
+            file: "rtmp://s3ejm3l5ezl11.cloudfront.net/cfx/st/#{@video.video}",
+            title: "#{@video.title}",
+            width: '100%',
+            aspectratio: '16:9' 
+            });
         - else
-          %iframe(width="420" height="315" src="#{ @chapter.videos.first.video }" frameborder="0" allowfullscreen)
-        - if @video
-          %h3= @video.title
-          %p=  @video.description
-        - else
-          %h3= @chapter.videos.first.title
-          %p=  @chapter.videos.first.description
+          %script(type="text/javascript")
+            jwplayer('mediaplayer').setup({
+            file: "rtmp://s3ejm3l5ezl11.cloudfront.net/cfx/st/#{@chapter.videos.first.video}",
+            width: '100%',
+            aspectratio: '16:9' 
+            });
       - else
         %p no videos at the moment
+    - if @video
+      %br
+      %p=  @video.description
+    - else
+      %h3= @chapter.videos.first.title
+      %p=  @chapter.videos.first.description
 
     %table.large-12.columns
       - if @chapter.videos != []
